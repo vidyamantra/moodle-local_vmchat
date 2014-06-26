@@ -2,7 +2,7 @@
 /*css for chatbox*/
 .ui-chatbox {
     position: relative;
-    bottom:285px;
+    bottom:286px;
     padding: 0px 0px 2px 0px;
     border-bottom: none;
     z-index: -1; 
@@ -72,6 +72,7 @@ ui-memblist-usr
     position: fixed;
     bottom:32px;
     background:  #CCCCCC;
+    z-index: 2;
 }
 .ui-memblist-titlebar {
     padding: 3px 3px 3px 3px;
@@ -116,10 +117,11 @@ ui-memblist-usr
 }
 #closebtn {
       /* background:url('../images/close.png') top no-repeat;*/
-       border:none;
-     /* margin: 0 auto;*/
+      border:none;
       width: 19px;
       cursor: pointer;
+      margin: 0; /* override moodle button css*/
+      padding: 0;/* override moodle button css*/
 }
 #hide_bar input.close{
 	background:url('../images/close.png') top no-repeat;
@@ -416,10 +418,9 @@ border-bottom-right-radius: 6px;
 border-bottom-left-radius: 6px;
 }
 .ui-chatbox-input textarea{
-  /*width: 183px !important;*/
   font-size: 14px;
   border: 1px solid #ccc !important;
- /* border-radius: 4px;*/
+  padding: 0; /* override moodle textarea css*/
 }
 .ui-widget-header .ui-corner-all{
   border-radius: 0;
