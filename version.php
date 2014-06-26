@@ -21,5 +21,5 @@ $plugin->version = 2013080800;
 $plugin->release = '2.5 (Build: 2013051400)';
 //$plugin->requires = 2013051400;
 $plugin->requires = 2012120310; //moodle 2.4.10 or later
-$plugin->maturity = MATURITY_UNSTABLE;
+$plugin->maturity = MATURITY_RC;
 $plugin->dependencies = array('local_getkey' => ANY_VERSION);
