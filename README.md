@@ -1,16 +1,15 @@
 moodle-local_vmchat
 ===================
 
-Moodle - Local plugin for footer chat
+Moodle - Local plugin for vmchat (footer chat)
 
 
-This plugin placed a bar for chat at the bottom of your site.
-Your users can chat with other online users in real time.
+This plugin adds a footer chat bar at your site.
+Users will be able to chat with other users.
 
 Dependencies
 ----------------------
 Getkey local module is required to run vmchat.
-This plugin get API key for vmchat authentication from vidyamantra.com.
 
 
 Installation in Moodle
