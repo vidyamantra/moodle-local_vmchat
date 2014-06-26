@@ -1,4 +1,4 @@
-vmchat
+chat
 ======
 
-VM Chat
+Chat - Core module for footer chat
