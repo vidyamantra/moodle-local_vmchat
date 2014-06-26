@@ -1,0 +1,19 @@
+Vmchat for footer
+----------------
+
+Below code is not required. This is just for reference:- 
+
+ To run this plugin some html code requires that get added automatically during installation.
+ In case if that code is missing in Moodle we can easily achieve this through interface. 
+ In  Additional HTML(moodle/admin/settings.php?section=additionalhtml) page add the below code:- 
+
+*  Within HEAD 
+<!-- fcStart --><script language="JavaScript"> var wwwroot="http://localhost/moodle/";</script>
+<script type="text/javascript" src="http://localhost/moodle/local/vmchat/bundle/chat/bundle/jquery/jquery-1.11.0.min.js">
+</script><script type="text/javascript" src="http://localhost/moodle/local/vmchat/bundle/chat/bundle/jquery/jquery-ui.min.js">
+</script><script type="text/javascript" src="http://localhost/moodle/local/vmchat/index.js"></script><!-- fcEnd -->  
+ 
+ Note:- Replace this url "http://localhost/moodle" with your site url.
+  
+ * Before BODY is closed 
+  	<div id="stickycontainer"></div><!-- move page up from bottom to display bottom content   --> 
