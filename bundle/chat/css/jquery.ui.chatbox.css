@@ -125,6 +125,7 @@ ui-memblist-usr
 }
 #hide_bar input.close{
 	background:url('../images/close.png') top no-repeat;
+	opacity: 1;
 }
 
 #hide_bar input.expand{
