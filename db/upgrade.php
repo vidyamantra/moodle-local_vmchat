@@ -39,13 +39,13 @@ function xmldb_local_vmchat_upgrade($oldversion) {
     // Put any upgrade step following this
 
 
-    if ($oldversion < 2013080801) {
+    if ($oldversion < 2014063000) {
     	set_config('additionalhtmlhead', '');
     	set_config('additionalhtmlfooter', '');
         unset_config('enablevmchat','local_vmchat');
         
         // vmchat savepoint reached
-        upgrade_plugin_savepoint(true, 2013080801, 'vmchat','local');
+        upgrade_plugin_savepoint(true, 2014063000, 'local','vmchat');
     }
 
     return true;
