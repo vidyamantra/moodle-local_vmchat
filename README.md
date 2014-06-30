@@ -15,3 +15,4 @@ Getkey local module is required to run vmchat.
 Installation in Moodle
 ----------------------
 * Unzip the zip file and place the vmchat folder in local folder of Moodle.
+* Go to Site administration -> Vm chat and activate this module.

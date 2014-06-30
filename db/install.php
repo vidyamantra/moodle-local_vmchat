@@ -33,7 +33,7 @@ defined('MOODLE_INTERNAL') || die;
  * @return void
  */
 function xmldb_local_vmchat_install() {
-    global $DB, $CFG;
+   /* global $DB, $CFG;
    
     // footer part
     $sql="UPDATE {config} set value=concat(value, '<div id=\"stickycontainer\"></div>') where name='additionalhtmlfooter'";
@@ -42,5 +42,6 @@ function xmldb_local_vmchat_install() {
     //header part
     $fstring = '<!-- fcStart --><script language="JavaScript"> var wwwroot="'.$CFG->wwwroot.'/";</script><script type="text/javascript" src="'.$CFG->wwwroot.'/local/vmchat/bundle/chat/bundle/jquery/jquery-1.11.0.min.js"></script><script type="text/javascript" src="'.$CFG->wwwroot.'/local/vmchat/bundle/chat/bundle/jquery/jquery-ui.min.js"></script><script type="text/javascript" src="'.$CFG->wwwroot.'/local/vmchat/index.js"></script><!-- fcEnd -->';
     $DB->execute('UPDATE {config} set value = concat(value,:fstring) WHERE  name=:hname', array( 'fstring' => $fstring,'hname' => 'additionalhtmlhead'));
-
+*/
+return true;
 }

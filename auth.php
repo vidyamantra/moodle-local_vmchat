@@ -33,8 +33,9 @@ function vmchat_curl_request($url, $post_data)
 
 
 if(!isset($_COOKIE['auth_user']) || !isset($_COOKIE['auth_pass']) || !isset($_COOKIE['path'])){
-	$result= $DB->get_field('config_plugins', 'value', array ('plugin' => 'local_getkey', 'name' => 'keyvalue'), $strictness=IGNORE_MISSING);
+	$result= $DB->get_field('config_plugins', 'value', array ('plugin' => 'local_getkey', 'name' => 'keyvalue'));
 	$licen = $result;
+
 	//send auth detail to server 
 	$authusername = substr(str_shuffle(MD5(microtime())), 0, 12);
 	$authpassword = substr(str_shuffle(MD5(microtime())), 0, 12);
