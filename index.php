@@ -75,6 +75,8 @@ if ($mform->is_cancelled()) {
     
 
 	}
+	unset($fromform->enablevmchat);
+	purge_all_caches();
 }
 
 echo $OUTPUT->header();
