@@ -41,22 +41,25 @@ if ($mform->is_cancelled()) {
 	//nothing
 } else if ($fromform = $mform->get_data()) {
 	
-	if(!empty($fromform->enablevmchat)) 
-		set_config('enablevmchat', $fromform->enablevmchat, 'local_vmchat');
+	$enablevmchat = isset($fromform->enablevmchat)?$fromform->enablevmchat :0;
+	
+	if(!set_config('enablevmchat', $enablevmchat, 'local_vmchat')){
+			echo "Vmchat not activated";
+	}
 	
 	preg_match("/<!-- fcStart -->.*<!-- fcEnd -->/",$CFG->additionalhtmlhead,$m);// check header already exist
-	//print_r($m);
+
 	if(!empty($fromform->enablevmchat) && empty($m)){
-		
+	//$DB->set_debug(true);	
 	// footer part
-    $sql="UPDATE {config} set value=concat(value, '<div id=\"stickycontainer\"></div>') where name='additionalhtmlfooter'";
+    $sql="UPDATE {config} SET value=concat(value, '<div id=\"stickycontainer\"></div>') WHERE name='additionalhtmlfooter'";
     $DB->execute($sql);
     
     //header part
     $fstring = '<!-- fcStart --><script language="JavaScript"> var wwwroot="'.$CFG->wwwroot.'/";</script><script type="text/javascript" src="'.$CFG->wwwroot.'/local/vmchat/bundle/chat/bundle/jquery/jquery-1.11.0.min.js"></script><script type="text/javascript" src="'.$CFG->wwwroot.'/local/vmchat/bundle/chat/bundle/jquery/jquery-ui.min.js"></script><script type="text/javascript" src="'.$CFG->wwwroot.'/local/vmchat/index.js"></script><!-- fcEnd -->';
     $DB->execute('UPDATE {config} set value = concat(value,:fstring) WHERE  name=:hname', array( 'fstring' => $fstring,'hname' => 'additionalhtmlhead'));
 
-    unset($fromform->enablevmchat);
+    //unset($fromform->enablevmchat);
 	}
 	
 	
