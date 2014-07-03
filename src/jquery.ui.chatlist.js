@@ -2,9 +2,8 @@
 * http://vidyamantra.com
 *
 * Depends on jquery.ui.core, jquery.ui.widiget, jquery.ui.effect
-* 
+*
 * Also uses some styles for jquery.ui.dialog
-* 
 */
 
 
@@ -26,7 +25,7 @@
                 init: function(elem) {
                     this.elem = elem;
                 },
-                addUsr: function(peer) { 
+                addUsr: function(peer) {
                     var self = this;
                     var box = self.elem.uiChatboxLog;
                     var e = document.createElement('div');
@@ -35,35 +34,33 @@
                     var systemMessage = false;
 
                     if (peer) {
-                    	var peerlink = document.createElement("a");
-                    	peerlink.href='#'+peer.userid;
-                    	                   	
+                        var peerlink = document.createElement("a");
+                        peerlink.href = '#' + peer.userid;
+
                         var peerName = document.createElement("img");
-                        peerName.src=peer.img;
+                        peerName.src = peer.img;
                         peerlink.appendChild(peerName);
-                      
-                        
-                        var usrElement = document.createElement("span");                        
-                        if(peer.lname==undefined){ peer.lname='';}
-                        
-                        $(usrElement).text(peer.name+" "+peer.lname);
+
+                        var usrElement = document.createElement("span");
+                        if(peer.lname == undefined){ peer.lname = '';}
+
+                        $(usrElement).text(peer.name + " " + peer.lname);
                         peerlink.appendChild(usrElement);
-                        
-                        e.appendChild(peerlink);                        
-                                               
+
+                        e.appendChild(peerlink);
+
                     } else {
                         systemMessage = true;
                     }
-                                     
+
                     $(e).addClass("ui-memblist-usr");
-                    $(e).attr("id",'ml'+peer.userid);
+                    $(e).attr("id", 'ml' + peer.userid);
                     $(e).fadeIn();
                     self._scrollToBottom();
 
-                    
                 },
                 highlightBox: function() {
-                    
+
                     var self = this;
                     self.elem.uiChatboxTitlebar.effect("highlight", {}, 300);
                     self.elem.uiChatbox.effect("bounce", {times:3}, 300, function(){
@@ -80,7 +77,7 @@
                 }
             }
         },
-       
+
         toggleContent: function(event) {
             this.uiChatboxContent.toggle();
             if(this.uiChatboxContent.is(":visible")) {
@@ -99,8 +96,8 @@
             // chatbox
             uiChatbox = (self.uiChatbox = $('<div></div>'))
             .appendTo(document.body)
-            .addClass('ui-widget ' + 
-                'ui-corner-top ' + 
+            .addClass('ui-widget ' +
+                'ui-corner-top ' +
                 'ui-memblist'
             )
             .attr('id', 'memlist')
@@ -113,7 +110,7 @@
             .focusout(function(){
                 self.uiChatboxTitlebar.removeClass('ui-state-focus');
                 }),
-                
+
             // titlebar
             uiChatboxTitlebar = (self.uiChatboxTitlebar = $('<div></div>'))
                 .addClass('ui-widget-header ' +
@@ -121,45 +118,44 @@
                 'ui-memblist-titlebar ' +
                 'ui-dialog-header' // take advantage of dialog header style
             )
-            .click(function(event) { 
+            .click(function(event) {
                // self.toggleContent(event);
             })
             .appendTo(uiChatbox),
-            
+
             uiChatboxTitle = (self.uiChatboxTitle = $('<span></span>'))
             .html(title)
             .appendTo(uiChatboxTitlebar),
-            
+
             uiChatboxTitlebarClose = (self.uiChatboxTitlebarClose = $('<a href="#"></a>'))
                 .addClass('ui-corner-all ' +
                 'ui-memblist-icon '
-            	)
-            	.attr('role', 'button')
-            	.hover(function() {uiChatboxTitlebarClose.addClass('ui-state-hover');},
-            	function() {uiChatboxTitlebarClose.removeClass('ui-state-hover');})
-
+                )
+                .attr('role', 'button')
+                .hover(function() {uiChatboxTitlebarClose.addClass('ui-state-hover');},
+                function() {uiChatboxTitlebarClose.removeClass('ui-state-hover');})
 
             uiChatboxTitlebarMinimize = (self.uiChatboxTitlebarMinimize = $('<a href="#"></a>'))
-            	.addClass('ui-corner-all ' + 
+                .addClass('ui-corner-all ' +
                     'ui-memblist-icon'
-            	)
+                )
                 .attr('role', 'button')
                 .hover(function() {uiChatboxTitlebarMinimize.addClass('ui-state-hover');},
                 function() {uiChatboxTitlebarMinimize.removeClass('ui-state-hover');})
 
-            	.click(function(event) {
-                                               
+                .click(function(event) {
+
                         $("#chat_div").memberlist("option", "boxManager").toggleBox();// hide header behind footer bar
                         return false;
-            	})
+                })
                 .appendTo(uiChatboxTitlebar),
-                
+
             uiChatboxTitlebarMinimizeText = $('<span></span>')
                 .addClass('ui-icon ' +
                 'ui-icon-minusthick')
                 .text('minimize')
                 .appendTo(uiChatboxTitlebarMinimize),
-                
+
             // content
             uiChatboxContent = (self.uiChatboxContent = $('<div></div>'))
                 .addClass('ui-widget-content ' +
@@ -167,11 +163,11 @@
                 )
                 .appendTo(uiChatbox),
             uiChatboxLog = (self.uiChatboxLog = self.element)
-                .addClass('ui-widget-content '+
+                .addClass('ui-widget-content ' +
                 'ui-memblist-log'
             )
             .appendTo(uiChatboxContent)
-           
+
             .focusin(function() {
                 var box = $(this).parent().prev();
                 box.scrollTop(box.get(0).scrollHeight);
@@ -181,62 +177,58 @@
             uiChatboxTitlebar.find('*').add(uiChatboxTitlebar).disableSelection();
 
             // switch focus to input box when whatever clicked
-	        $(document).on("click", '#chat_div .ui-memblist-usr a', function(event){  
-            	var str=$(this);
-            	var id=str.attr('href').replace('#', '');
-            	var name = str.find('span').html();
-           
-           
-            	if($.inArray(id, idList) == -1){
-    				counter++;
-        			idList.push(id);
-        			vmstorage[id]=[];
-        			vmstorage[id].push( { userid:id, name:name});
-            	}
-        	
-            	chatboxManager.addBox(id, 
+            $(document).on("click", '#chat_div .ui-memblist-usr a', function(event){
+                var str = $(this);
+                var id = str.attr('href').replace('#', '');
+                var name = str.find('span').html();
+
+                if($.inArray(id, idList) == -1){
+                    counter++;
+                    idList.push(id);
+                    vmstorage[id] = [];
+                    vmstorage[id].push( { userid:id, name:name});
+                }
+
+                chatboxManager.addBox(id,
                                   {dest:"dest" + counter, // not used in demo
                                    title:"box" + counter,
                                    first_name:name
                                    //you can add your own options too
                                   });
-                                  
-            	chatboxManager.init({
-            		user:{'name' : name},
-                	messageSent : function(id,user,msg){
-                 		$("#"+id).chatbox("option", "boxManager").addMsg(user.name, msg);
-                	}
-            	});
-            	id=null;
-            	name=null;    
-                 
+
+                chatboxManager.init({
+                    user:{'name' : name},
+                    messageSent : function(id,user,msg){
+                        $("#" + id).chatbox("option", "boxManager").addMsg(user.name, msg);
+                    }
+                });
+                id = null;
+                name = null;
+
             });
-           
 
             self._setWidth(self.options.width);
             self._position(self.options.offset);
 
             self.options.boxManager.init(self);
-            
+
         },
-        
-        
 
         _setOption: function(option, value) {
             if (value != null) {
                 switch(option) {
                     case "hidden":
-                    if (value)
+                    if (value){
                         this.uiChatbox.hide();
-                    else
+                    }else{
                         this.uiChatbox.show();
-
+                    }
                         break;
-                
+
                     case "offset":
                         this._position(value);
                         break;
-                
+
                     case "width":
                         this._setWidth(value);
                         break;
@@ -255,8 +247,5 @@
             this.uiChatbox.css("right", offset);
         }
     });
-    
-    
- 
-}(jQuery));
 
+}(jQuery));
