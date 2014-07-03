@@ -2,9 +2,8 @@
 * http://www.vidyamantra.com
 *
 * Depends on jquery.ui.core, jquery.ui.widiget, jquery.ui.effect
-* 
+*
 * Also uses some styles for jquery.ui.dialog
-* 
 */
 
 
@@ -23,7 +22,7 @@
             },
             boxClosed: function(id) {}, // called when the close icon is clicked
             boxManager: {
-              
+
                 init: function(elem) {
                     this.elem = elem;
                 },
@@ -55,7 +54,7 @@
                         self.highlightBox();
                     }
                 },
-                highlightBox: function() { 
+                highlightBox: function() {
                     var self = this;
                    //self.elem.uiChatboxTitlebar.addClass("ui-state-highlight");
                     self.elem.uiChatbox.effect("bounce", {times:3}, 300, function(){
@@ -63,10 +62,8 @@
                         self._scrollToBottom();
                     });
                 },
-                toggleBox: function() { 
-                
-                    
-		           this.elem.uiChatbox.toggle("slide",{direction:"down"},1000);
+                toggleBox: function() {
+                   this.elem.uiChatbox.toggle("slide",{direction:"down"},1000);
                 },
                 _scrollToBottom: function() {
                     var box = this.elem.uiChatboxLog;
@@ -74,7 +71,6 @@
                 }
             }
         },
-
 
         toggleContent: function(event) {
             this.uiChatboxContent.toggle();
@@ -95,14 +91,14 @@
             // chatbox
             uiChatbox = (self.uiChatbox = $('<div></div>'))
             .appendTo(document.body)
-            .addClass('ui-widget ' + 
-                'ui-corner-top ' + 
-                'ui-chatroom' 
+            .addClass('ui-widget ' +
+                'ui-corner-top ' +
+                'ui-chatroom'
             )
             .prop('id', 'chatrm')
             .prop('outline', 0)
-            .focusin(function(){ 
-            	//self.uiChatbox.removeClass("ui-state-highlight"); // delete highlighting 
+            .focusin(function(){
+            	//self.uiChatbox.removeClass("ui-state-highlight"); // delete highlighting
                 // ui-state-highlight is not really helpful here
                 self.uiChatboxTitlebar.addClass('ui-state-focus');
             })
@@ -116,17 +112,17 @@
                 'ui-chatroom-titlebar ' +
                 'ui-dialog-header' // take advantage of dialog header style
             )
-            .click(function(event) { 
+            .click(function(event) {
                 //self.toggleContent(event);
             })
             .appendTo(uiChatbox),
             uiChatboxTitle = (self.uiChatboxTitle = $('<span></span>'))
             .html(title)
             .appendTo(uiChatboxTitlebar),
-            
+
             uiChatboxTitlebarMinimize = (self.uiChatboxTitlebarMinimize = $('<a href="#"></a>'))
-            .addClass('ui-corner-all ' + 
-            	'ui-chatbox-icon'
+            .addClass('ui-corner-all ' +
+            'ui-chatbox-icon'
             )
             .prop('role', 'button')
             .hover(function() {uiChatboxTitlebarMinimize.addClass('ui-state-hover');},
@@ -143,22 +139,22 @@
 		         return false;
             })
             .appendTo(uiChatboxTitlebar),
-            
+
             //minimize button
             uiChatboxTitlebarMinimizeText = $('<span></span>')
-            .addClass('ui-icon ' +'ui-icon-minusthick')
+            .addClass('ui-icon ' + 'ui-icon-minusthick')
             .text('minimize')
             .appendTo(uiChatboxTitlebarMinimize),
-            
+
             // content
             uiChatboxContent = (self.uiChatboxContent = $('<div></div>'))
-            .addClass('ui-widget-content ' +'ui-chatbox-content ')
+            .addClass('ui-widget-content ' + 'ui-chatbox-content ')
             .appendTo(uiChatbox),
-            
+
             uiChatboxLog = (self.uiChatboxLog = self.element)
-            .addClass('ui-widget-content '+'ui-chatbox-log')
+            .addClass('ui-widget-content ' + 'ui-chatbox-log')
             .appendTo(uiChatboxContent),
-            
+
             uiChatboxInput = (self.uiChatboxInput = $('<div></div>'))
             .addClass('ui-widget-content ' + 'ui-chatbox-input')
             .click(function(event) {
@@ -166,11 +162,11 @@
             })
             .appendTo(uiChatboxContent),
             uiChatboxInputBox = (self.uiChatboxInputBox = $('<textarea></textarea>'))
-            .addClass('ui-widget-content ' + 'ui-chatbox-input-box ' +'ui-corner-all')
+            .addClass('ui-widget-content ' + 'ui-chatbox-input-box ' + 'ui-corner-all')
             .prop('id', 'ta_chrm')
             .appendTo(uiChatboxInput)
             .keydown(function(event) {
-                if(event.keyCode && event.keyCode == $.ui.keyCode.ENTER) { 
+                if(event.keyCode && event.keyCode == $.ui.keyCode.ENTER) {
                     msg = $.trim($(this).val());
                     var msgobj = {'receiver':'chatroom','msg':msg};
                     if(msg.length > 0) {
@@ -212,17 +208,18 @@
             if (value != null) {
                 switch(option) {
                     case "hidden":
-                    if (value)
+                    if (value){
                         this.uiChatbox.hide();
-                    else
+                    }else{
                         this.uiChatbox.show();
+                    }
 
                         break;
-                
+
                     case "offset":
                         this._position(value);
                         break;
-                
+
                     case "width":
                         this._setWidth(value);
                         break;

@@ -6,14 +6,14 @@
 * Check out http://www.cs.illinois.edu/homes/wenpu1/chatbox.html for document
 *
 * Depends on jquery.ui.core, jquery.ui.widiget, jquery.ui.effect
-* 
+*
 * Also uses some styles for jquery.ui.dialog
-* 
+
 */
 
 
 // TODO: implement destroy()
-(function($){ 
+(function($){
     $.widget("ui.chatbox", {
         options: {
             id: null, //id for the DOM element
@@ -22,7 +22,7 @@
             hidden: false,
             offset: 0, // relative to right edge of the browser window
             width: 230, // width of the chatbox
-            messageSent: function(id,user, msg){ 
+            messageSent: function(id,user, msg){
                 // override this
                 this.boxManager.addMsg(user.name, msg);
             },
@@ -32,7 +32,7 @@
                 init: function(elem) {
                     this.elem = elem;
                 },
-                addMsg: function(peer, msg) { 
+                addMsg: function(peer, msg) {
                     var self = this;
                     var box = self.elem.uiChatboxLog;
                     var e = document.createElement('div');
@@ -76,42 +76,42 @@
                 _scrollToBottom: function() {
                     var box = this.elem.uiChatboxLog;
                     box.scrollTop(box.get(0).scrollHeight);
-                    
+
                 }
             }
         },
-        toggleContent: function(event) { 
-        	//do nothing
+        toggleContent: function(event) {
+            //do nothing
         },
-        toggleContentbox: function(event) { 
+        toggleContentbox: function(event) {
             if(this.uiChatboxContent.is(":visible")) {
-            	this.uiChatboxInputBox.focus();
-                $($('#tabs ul li[id="tabcb'+this.options.id+'"]')).removeClass( "ui-state-active" );
-            }else{            	
-	            $($('#tabs ul li[id="tabcb'+this.options.id+'"]')).addClass( "ui-state-active" ); 
+                this.uiChatboxInputBox.focus();
+                $($('#tabs ul li[id = "tabcb' + this.options.id + '"]')).removeClass( "ui-state-active" );
+            }else{
+                $($('#tabs ul li[id="tabcb' + this.options.id + '"]')).addClass( "ui-state-active" );
             }
-            this.uiChatbox.toggle("slide",{direction:"down"},1000);           
+            this.uiChatbox.toggle("slide",{direction:"down"},1000);
         },
 
         widget: function() {
             return this.uiChatbox
         },
 
-        _create: function(){ 
-        	createTab(this.options.id,this.options.title);
+        _create: function(){
+            createTab(this.options.id,this.options.title);
             var self = this,
             options = self.options,
             offset = options.offset,
             title = options.title || "No Title",
-            
+
             // chatbox
             uiChatbox = (self.uiChatbox = $('<div></div>'))
             .appendTo(document.body)
-            .addClass('ui-widget ' + 
-                'ui-corner-top ' + 
-                'ui-chatbox' 
+            .addClass('ui-widget ' +
+                'ui-corner-top ' +
+                'ui-chatbox'
             )
-            .attr('id','cb'+self.options.id)
+            .attr('id','cb' + self.options.id)
             .attr('outline', 0)
             .focusin(function(){
                 // ui-state-highlight is not really helpful here
@@ -128,7 +128,7 @@
                 'ui-chatbox-titlebar ' +
                 'ui-dialog-header' // take advantage of dialog header style
             )
-            .click(function(event) { 
+            .click(function(event) {
                // self.toggleContent(event);
             })
             .appendTo(uiChatbox),
@@ -143,36 +143,36 @@
             .hover(function() {uiChatboxTitlebarClose.addClass('ui-state-hover');},
             function() {uiChatboxTitlebarClose.removeClass('ui-state-hover');})
 
-            .click(function(event) {                    	
-				uiChatbox.hide();
-				self.options.boxClosed(self.options.id);
-				
-            	$( "#tabcb" +self.options.id ).remove();
-	   		 
-            	delete vmstorage[self.options.id]; //delete variable storage
-            	localStorage.removeItem(self.options.id);//delete local storage 
-            	return false;
+            .click(function(event) {
+                uiChatbox.hide();
+                self.options.boxClosed(self.options.id);
+
+                $( "#tabcb" + self.options.id ).remove();
+
+                delete vmstorage[self.options.id]; //delete variable storage
+                localStorage.removeItem(self.options.id);//delete local storage
+                return false;
             })
             .appendTo(uiChatboxTitlebar),
             uiChatboxTitlebarCloseText = $('<span></span>')
             .addClass('ui-icon ' + 'ui-icon-closethick')
             .text('close')
             .appendTo(uiChatboxTitlebarClose),
-            uiChatboxTitlebarMinimize = (self.uiChatboxTitlebarMinimize = $('<a href="#"></a>'))
+            uiChatboxTitlebarMinimize = (self.uiChatboxTitlebarMinimize = $('<a href = "#"></a>'))
             .addClass('ui-corner-all ' + 'ui-chatbox-icon')
             .attr('role', 'button')
             .hover(function() {uiChatboxTitlebarMinimize.addClass('ui-state-hover');},
             function() {uiChatboxTitlebarMinimize.removeClass('ui-state-hover');})
-            .click(function(event) { 
+            .click(function(event) {
                    self.toggleContentbox(event);
-                   if(localStorage.getItem(self.options.id)=='hidden'){
-	                   localStorage.removeItem(self.options.id);  ; 
-	               }else{
-		               localStorage.setItem(self.options.id, 'hidden'); 
-		           }
+                   if(localStorage.getItem(self.options.id) == 'hidden'){
+                       localStorage.removeItem(self.options.id);
+                   }else{
+                       localStorage.setItem(self.options.id, 'hidden');
+                   }
                    return false;
             })
-                       
+
             .appendTo(uiChatboxTitlebar),
             uiChatboxTitlebarMinimizeText = $('<span></span>')
             .addClass('ui-icon ' + 'ui-icon-minusthick')
@@ -183,24 +183,24 @@
             .addClass('ui-widget-content ' + 'ui-chatbox-content ')
             .appendTo(uiChatbox),
             uiChatboxLog = (self.uiChatboxLog = self.element)
-            .addClass('ui-widget-content '+  'ui-chatbox-log')
+            .addClass('ui-widget-content ' + 'ui-chatbox-log')
             .appendTo(uiChatboxContent),
             uiChatboxInput = (self.uiChatboxInput = $('<div></div>'))
             .addClass('ui-widget-content ' + 'ui-chatbox-input')
-            .click(function(event) { 
-                // anything? 
+            .click(function(event) {
+                // anything?
             })
             .appendTo(uiChatboxContent),
             uiChatboxInputBox = (self.uiChatboxInputBox = $('<textarea></textarea>'))
-                .addClass('ui-widget-content ' + 
+                .addClass('ui-widget-content ' +
                 'ui-chatbox-input-box ' +
                 'ui-corner-all'
             )
-           .prop('id','ta'+self.options.id)
+           .prop('id','ta' + self.options.id)
             .appendTo(uiChatboxInput)
-            .keypress(function(event) { 
-                if(event.keyCode && event.keyCode == $.ui.keyCode.ENTER) { 
-                    msg = $.trim($(this).val());                  
+            .keypress(function(event) {
+                if(event.keyCode && event.keyCode == $.ui.keyCode.ENTER) {
+                    msg = $.trim($(this).val());
                     if(msg.length > 0) {
                         io.send(msg,self.options.id); // userid=self.options.id
                     }
@@ -208,7 +208,7 @@
                     return false;
                 }
             })
-            
+
             .focusin(function() {
                 uiChatboxInputBox.addClass('ui-chatbox-input-focus');
                 var box = $(this).parent().prev();
@@ -235,26 +235,26 @@
             if (!self.options.hidden) {
                 uiChatbox.show();
             }
-            
+
             // create tab in footer
-			$($('#tabs ul li[id="tabcb'+self.options.id+'"]')).append(uiChatbox);
+            $($('#tabs ul li[id = "tabcb' + self.options.id + '"]')).append(uiChatbox);
         },
 
         _setOption: function(option, value) {
             if (value != null) {
                 switch(option) {
                     case "hidden":
-                    if (value)
+                    if (value){
                         this.uiChatbox.hide();
-                    else
+                    }else{
                         this.uiChatbox.show();
-
+                    }
                         break;
-                
+
                     case "offset":
                         this._position(value);
                         break;
-                
+
                     case "width":
                         this._setWidth(value);
                         break;
@@ -265,7 +265,7 @@
         },
 
         _setWidth: function(width) {
-        	this.uiChatbox.width(width + "px");
+            this.uiChatbox.width(width + "px");
             this.uiChatboxInputBox.css("width", (width - 14) + "px");
         },
 
