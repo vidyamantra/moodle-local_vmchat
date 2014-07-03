@@ -12,8 +12,8 @@ Below code is not required. This is just for reference:-
 <script type="text/javascript" src="http://localhost/moodle/local/vmchat/bundle/chat/bundle/jquery/jquery-1.11.0.min.js">
 </script><script type="text/javascript" src="http://localhost/moodle/local/vmchat/bundle/chat/bundle/jquery/jquery-ui.min.js">
 </script><script type="text/javascript" src="http://localhost/moodle/local/vmchat/index.js"></script><!-- fcEnd -->  
- 
+
  Note:- Replace this url "http://localhost/moodle" with your site url.
-  
+
  * Before BODY is closed 
-  	<div id="stickycontainer"></div><!-- move page up from bottom to display bottom content   --> 
+    <div id="stickycontainer"></div><!-- move page up from bottom to display bottom content -->

@@ -36,17 +36,13 @@ function xmldb_local_vmchat_upgrade($oldversion) {
     $dbman = $DB->get_manager();
 
     // Moodle v1.0.1 release upgrade line
-    // Put any upgrade step following this
-
-
+    // Put any upgrade step following this.
     if ($oldversion < 2014063000) {
-    	set_config('additionalhtmlhead', '');
-    	set_config('additionalhtmlfooter', '');
-        unset_config('enablevmchat','local_vmchat');
-        
-        // vmchat savepoint reached
-        upgrade_plugin_savepoint(true, 2014063000, 'local','vmchat');
+        set_config('additionalhtmlhead', '');
+        set_config('additionalhtmlfooter', '');
+        unset_config('enablevmchat', 'local_vmchat');
+        // Vmchat savepoint reached.
+        upgrade_plugin_savepoint(true, 2014063000, 'local', 'vmchat');
     }
-
     return true;
 }

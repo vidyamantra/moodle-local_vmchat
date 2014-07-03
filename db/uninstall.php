@@ -1,5 +1,4 @@
 <?php
-
 // This file is part of Moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
@@ -19,9 +18,9 @@
  * This file replaces the legacy STATEMENTS section in db/install.xml,
  * lib.php/modulename_install() post installation hook and partially defaults.php
  *
- * @package    mod
- * @subpackage workshop
- * @copyright  2009 David Mudrak <david.mudrak@gmail.com>
+ * @package    local
+ * @subpackage vmchat
+ * @copyright  2014 Pinky Sharma <pinky@vidyamantra.com>
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -34,18 +33,14 @@ defined('MOODLE_INTERNAL') || die();
  * @return bool true if success
  */
 function xmldb_local_vmchat_uninstall() {
-     global $DB, $CFG;
-	
-	//remove footer div
-    $sql="UPDATE {config} set value = replace(value, '<div id=\"stickycontainer\"></div>','') where value LIKE '%<div id=\"stickycontainer\"></div>%' and name='additionalhtmlfooter'";    
+    global $DB, $CFG;
+    // Remove footer div.
+    $sql = "UPDATE {config} set value = replace(value, '<div id=\"stickycontainer\"></div>','') where value
+    LIKE '%<div id = \"stickycontainer\"></div>%' and name = 'additionalhtmlfooter'";
     $DB->execute($sql);
-    
-    
-    // remove header html  
+    // Remove header html.
     $additionalhtmlhead = preg_replace("/<!-- fcStart -->.*<!-- fcEnd -->/", "", $CFG->additionalhtmlhead);
-    $DB->execute('UPDATE {config} set value = "'.$additionalhtmlhead.'" WHERE name=:hname', array('hname' => 'additionalhtmlhead'));
-    
+    $DB->execute('UPDATE {config} set value = "'.$additionalhtmlhead.'" WHERE name =:hname',
+    array('hname' => 'additionalhtmlhead'));
     return true;
 }
-
-	

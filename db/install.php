@@ -19,8 +19,8 @@
  *
  * Contains code that are run during the installation of report/logs
  *
- * @package    report_log
- * @copyright  2011 Petr Skoda {@link http://skodak.org}
+ * @package    local_vmchat
+ * @copyright  2014 Pinky Sharma
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
@@ -33,15 +33,6 @@ defined('MOODLE_INTERNAL') || die;
  * @return void
  */
 function xmldb_local_vmchat_install() {
-   /* global $DB, $CFG;
-   
-    // footer part
-    $sql="UPDATE {config} set value=concat(value, '<div id=\"stickycontainer\"></div>') where name='additionalhtmlfooter'";
-    $DB->execute($sql);
-    
-    //header part
-    $fstring = '<!-- fcStart --><script language="JavaScript"> var wwwroot="'.$CFG->wwwroot.'/";</script><script type="text/javascript" src="'.$CFG->wwwroot.'/local/vmchat/bundle/chat/bundle/jquery/jquery-1.11.0.min.js"></script><script type="text/javascript" src="'.$CFG->wwwroot.'/local/vmchat/bundle/chat/bundle/jquery/jquery-ui.min.js"></script><script type="text/javascript" src="'.$CFG->wwwroot.'/local/vmchat/index.js"></script><!-- fcEnd -->';
-    $DB->execute('UPDATE {config} set value = concat(value,:fstring) WHERE  name=:hname', array( 'fstring' => $fstring,'hname' => 'additionalhtmlhead'));
-*/
-return true;
+    // Do nothing.
+    return true;
 }

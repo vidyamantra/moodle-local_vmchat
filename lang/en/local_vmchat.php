@@ -1,5 +1,5 @@
 <?php
-// This file is part of VidyaMantra - http://vidyamantra.com/
+// This file is part of moodle - http://moodle.org/
 //
 // Moodle is free software: you can redistribute it and/or modify
 // it under the terms of the GNU General Public License as published by
@@ -21,7 +21,4 @@ $string['linceskey'] = 'API key';
 $string['configlinceskey'] = 'Enter the API key given by vidyamantra.com';
 $string['pagenotfound'] = 'Page not found';
 $string['enablevmchat'] = 'Enable vmchat';
-$string['configervmchat'] = 'Enable this option if you want to add vmchat.'; 
-
-
-
+$string['configervmchat'] = 'Enable this option if you want to add vmchat.';
