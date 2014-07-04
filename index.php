@@ -54,7 +54,7 @@ if ($fromform = $mform->get_data()) {
     if (!empty($fromform->enablevmchat) && empty($m)) {
         // Footer part.
         $sql = "UPDATE {config} SET value = concat(value, "
-                . "'<div id = \"stickycontainer\"></div>') WHERE name = 'additionalhtmlfooter'";
+                . "'<div id=\"stickycontainer\"></div>') WHERE name = 'additionalhtmlfooter'";
         $DB->execute($sql);
 
         // Header part.
