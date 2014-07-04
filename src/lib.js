@@ -9,7 +9,7 @@ function memberUpdate(e){
     if(typeof wwwroot === 'undefined'){
         var imgpath = "./images/online.png";
     }else{
-        var imgpath = wwwroot + "local/vmchat/bundle/chat/images/online.png"; //image folder path
+        var imgpath = wwwroot+"local/vmchat/bundle/chat/images/online.png"; //image folder path
     }
     if(userlist.length > 0){
         var count = userlist.length - 1;
