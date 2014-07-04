@@ -22,3 +22,4 @@ $string['configlinceskey'] = 'Enter the API key given by vidyamantra.com';
 $string['pagenotfound'] = 'Page not found';
 $string['enablevmchat'] = 'Enable vmchat';
 $string['configervmchat'] = 'Enable this option if you want to add vmchat.';
+$string['changesnotsaved'] = 'Changes not saved';

@@ -36,13 +36,17 @@ $PAGE->set_url(new moodle_url('/local/vmchat/index.php'));
 $value = 0;
 $value = get_config('local_vmchat', 'enablevmchat');
 $mform = new local_vmchat_form(null, array('enablevmchat' => $value));
+$statusmsg = '';
+$errormsg = '';
 
 if ($fromform = $mform->get_data()) {
 
     $enablevmchat = isset($fromform->enablevmchat) ? $fromform->enablevmchat : 0;
 
     if (!set_config('enablevmchat', $enablevmchat, 'local_vmchat')) {
-            echo "Vmchat not activated";
+        $errormsg = get_string('changesnotsaved', 'local_vmchat');
+    } else {
+        $statusmsg = get_string('changessaved');
     }
 
     preg_match("/<!-- fcStart -->.*<!-- fcEnd -->/", $CFG->additionalhtmlhead, $m);// Check header already exist.
@@ -85,7 +89,12 @@ echo $OUTPUT->header();
 // Api key exist in db.
 if (!get_config('local_getkey', 'keyvalue')) {
     echo $OUTPUT->error_text("Visit Administration Block > <a href = '".
-    $CFG->wwwroot."/local/getkey/index.php'>Get key </a> and register for API key.");
+    $CFG->wwwroot."/local/getkey/index.php'>Get key </a> and register for API key. Please ignore if already done.");
+}
+if ($errormsg !== '') {
+    echo $OUTPUT->notification($errormsg);
+} else if ($statusmsg !== '') {
+    echo $OUTPUT->notification($statusmsg, 'notifysuccess');
 }
 $mform->display();
 echo $OUTPUT->footer();

@@ -21,7 +21,7 @@
  * @copyright  2014 Pinky Sharma
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-require_once("$CFG->dirroot/lib/formslib");
+require_once($CFG->dirroot.'/lib/formslib.php');
 
 class local_vmchat_form extends moodleform {
     function definition() {
