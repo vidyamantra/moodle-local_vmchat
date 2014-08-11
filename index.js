@@ -69,6 +69,7 @@ if (!window.opener) { // Check popup
 
              if(localStorage.getItem('init') == 'false'){ // check footer is close
                 $('#stickybar').removeClass('maximize').addClass('minimize');
+                $('#hide_bar input').removeClass('close').addClass('expand');
              }
 
              tabs = $('#tabs').tabs({ cache: true, activeOnAdd: true});
@@ -166,7 +167,7 @@ if (!window.opener) { // Check popup
                 }
             });
             $(document).on("connectionclose", function(e) {
-                $("#user_list .inner_bt #usertab_icon").css({'background': 'url(' + wwwroot + '/local/vmchat/images/offline.png)no-repeat top left'});
+                $("#user_list .inner_bt #usertab_icon").css({'background': 'url(' + wwwroot + 'local/vmchat/bundle/chat/images/offline.png)no-repeat top left'});
                 $("#user_list .inner_bt #usertab_text").text(lang.whos + " (0)");
                 $("#chatroom_bt .inner_bt #chatroom_text").text(lang.chatroom + " (0)");
                 $('div#memlist').css('display','none');
