@@ -420,7 +420,7 @@ ui-memblist-usr
     padding: 0; /* override moodle textarea css*/
 }
 .ui-widget-header .ui-corner-all{
-    border-radius: 0;
+    border-radius: 4px;
     border:none;
 }
 .ui-widget-content .ui-corner-all{

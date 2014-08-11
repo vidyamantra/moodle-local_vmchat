@@ -203,8 +203,17 @@
                     msg = $.trim($(this).val());
                     if(msg.length > 0) {
                         io.send(msg,self.options.id); // userid=self.options.id
+                        $(this).val('');
+                        $("#" + self.options.id).chatbox("option").messageSent(self.options.id, {name:io.cfg.userobj.name}, msg);// sent msg to self
+                        // to avoid error of undefined
+                        var k = self.options.id;
+                        if (typeof(vmstorage[k]) == 'undefined') {
+                            vmstorage[k] = [];
+                        }
+                        var time = new Date().getTime();
+                        vmstorage[k].push({ userid:io.cfg.userid, name:io.cfg.userobj.name , msg: msg, time: time });
                     }
-                    $(this).val('');
+                    
                     return false;
                 }
             })

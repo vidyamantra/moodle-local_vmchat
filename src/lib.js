@@ -135,15 +135,16 @@ function messageUpdate(e){
         }
 
         //send msg to self
-        if (self == from.userid){
+        /*if (self == from.userid){
             $("#" + to.userid).chatbox("option").messageSent(to.userid,from, msg);
             var k = to.userid;
         }
         // to avoid error of undefined
+        var k = to.userid;
         if (typeof(vmstorage[k]) == 'undefined') {
             vmstorage[k] = [];
         }
-        console.log('vmstograge key = ' + k);
+        console.log('vmstograge key = ' + k);*/
         vmstorage[k].push({ userid:from.userid,name:from.name , msg: msg, time: time });
     }
 }

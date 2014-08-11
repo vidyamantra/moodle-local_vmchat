@@ -56,11 +56,13 @@
                 },
                 highlightBox: function() {
                     var self = this;
-                   //self.elem.uiChatboxTitlebar.addClass("ui-state-highlight");
-                    self.elem.uiChatbox.effect("bounce", {times:3}, 300, function(){
+                    self.elem.uiChatboxTitlebar.addClass("ui-state-highlight");
+                    /*self.elem.uiChatboxTitlebar.effect("highlight", {},600, function(){
                         self.highlightLock = false;
                         self._scrollToBottom();
-                    });
+                    });*/
+                    self.highlightLock = false;
+                    self._scrollToBottom();
                 },
                 toggleBox: function() {
                    this.elem.uiChatbox.toggle("slide",{direction:"down"},1000);
@@ -98,7 +100,7 @@
             .prop('id', 'chatrm')
             .prop('outline', 0)
             .focusin(function(){
-            	//self.uiChatbox.removeClass("ui-state-highlight"); // delete highlighting
+            	self.uiChatboxTitlebar.removeClass("ui-state-highlight"); // delete highlighting
                 // ui-state-highlight is not really helpful here
                 self.uiChatboxTitlebar.addClass('ui-state-focus');
             })
@@ -114,6 +116,7 @@
             )
             .click(function(event) {
                 //self.toggleContent(event);
+                self.uiChatboxTitlebar.removeClass("ui-state-highlight");
             })
             .appendTo(uiChatbox),
             uiChatboxTitle = (self.uiChatboxTitle = $('<span></span>'))
@@ -171,8 +174,18 @@
                     var msgobj = {'receiver':'chatroom','msg':msg};
                     if(msg.length > 0) {
                         io.send(msgobj);
-                    }
-                    $(this).val('');
+                        $(this).val('');
+                        self.options.messageSent({name:io.cfg.userobj.name}, msg);// sent msg to self
+                        // store data on browser
+                        var time = new Date().getTime();
+                        if(sessionStorage.getItem('chatroom') != null){
+                            var chatroom = JSON.parse(sessionStorage.getItem('chatroom'));
+                            chatroom.push({ userid:io.cfg.userid, name:io.cfg.userobj.name, msg: msg, time: time});
+                            sessionStorage.setItem('chatroom',JSON.stringify(chatroom));
+                        } else {
+                            sessionStorage.setItem('chatroom', JSON.stringify([{ userid:io.cfg.userid, name:io.cfg.userobj.name, msg: msg, time: time}]));
+                        }                      
+                    }                   
                     return false;
                 }
             })
