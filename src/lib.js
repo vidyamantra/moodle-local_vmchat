@@ -69,7 +69,7 @@ function messageUpdate(e){
     var from = e.fromUser;
     var self = io.cfg.userid;
     var time = new Date().getTime();
-    //comman chat room
+    //common chat room
     if( e.message.receiver == 'chatroom' && (to == "" || to == undefined)){
         if(self == from.userid){
             $("#chat_room").chatroom("option").messageSent(from, msg);
@@ -83,7 +83,7 @@ function messageUpdate(e){
                     document.body.appendChild(d);
                     chatroombox = $("#chat_room").chatroom({id:"chat_room",
                                             user : from,
-                                            title : "Comman chat",
+                                            title : lang.chatroom_header,
                                             messageSent : function(user, msg) {
                                                 $("#chat_room").chatroom("option", "boxManager").addMsg(user.name,msg);
                                             }});
@@ -158,7 +158,7 @@ function statusUpdate(from,msg,prop){
     }
 }
 
-function comman_chatbox_update(from,msg){
+function common_chatbox_update(from,msg){
     if($("div#chat_room").length){
         $("#chat_room").chatroom("option").messageSent(from, msg);
     }
@@ -168,7 +168,7 @@ function newStatus(e){
     $.each(e.message, function(k, u) {
         if(e.newuser != null && u.userid == e.newuser){
             statusUpdate(u,'Online', false);
-            comman_chatbox_update(u, 'Online');
+            common_chatbox_update(u, 'Online');
         }
     });
 }
@@ -217,7 +217,7 @@ function displaycomChatHistory(){
             if(id < 1){
                 chatroombox = $("#chat_room").chatroom({id:"chat_room",
                                             user : msgobj,
-                                            title : "Comman chat",
+                                            title : "Common chat",
                                             messageSent : function(user, msg) {
                                                 $("#chat_room").chatroom("option", "boxManager").addMsg(user.name,msg);
                                             }});
