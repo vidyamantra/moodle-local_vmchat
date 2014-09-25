@@ -117,11 +117,14 @@ ui-memblist-usr
 }
 #closebtn {
     /* background:url('../images/close.png') top no-repeat;*/
-    border:none;
-    width: 19px;
+    border:0;
+    width: 25px;
     cursor: pointer;
+    height: 25px;
     margin: 0; /* override moodle button css*/
     padding: 0;/* override moodle button css*/
+    white-space: pre-wrap;/* some theme require*/
+    outline: 0;/* moodle override*/
 }
 #hide_bar input.close{
     background:url('../images/close.png') top no-repeat;
@@ -138,8 +141,7 @@ ui-memblist-usr
     color: #333;
     cursor: pointer;
     height: 29px;
-    /*padding: 0px 12px;*/
-    padding: 0px 9px;
+    padding: 3px 4px;
     position: relative;
     padding-top: 2px;
     z-index: 1026;
@@ -476,3 +478,11 @@ a.ui-tabs-anchor{
 #stickycontainer{
     height: 40px;
 }
+
+/*.ui-widget *,
+.ui-widget *:before,
+.ui-widget *:after {
+    -webkit-box-sizing: content-box !important;
+    -moz-box-sizing: content-box !important;
+    box-sizing: content-box !important;
+}*/

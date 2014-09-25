@@ -86,7 +86,7 @@ $.when(
              vmstorage = JSON.parse(localStorage.getItem(sid));
          }
 
-         //checking comman chat local storage
+         //checking common chat local storage
          //Data stored inside sessionStorage variable
          if(sessionStorage.length > 0){
              displaycomChatHistory();

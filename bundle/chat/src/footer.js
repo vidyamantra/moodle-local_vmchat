@@ -36,12 +36,14 @@
             uiFooterbarClose = (self.uiFooterbarClose = $('<input>'))
             .prop('id', 'closebtn')
             .prop('type', 'button')
+            .prop('title', 'Close chat')
             .addClass('close')
             .appendTo(uiFooterbarClosebox)
             .clickToggle(function() {
                 if($('#stickybar').hasClass('maximize')){
                     $('#stickybar').removeClass('maximize').addClass('minimize');
-                    $('#hide_bar input').removeClass('close').addClass('expand');
+                    $('#hide_bar input').removeClass('close').addClass('expand')
+                    $('#hide_bar input').prop('title', 'Open chat');
                     io.disconnect();
                     $('.ui-memblist').remove();
                     $('.ui-chatbox').remove();
@@ -69,6 +71,7 @@
             function() {
                 $('#stickybar').removeClass('minimize').addClass('maximize');
                 $('#hide_bar input').removeClass('expand').addClass('close');
+                $('#hide_bar input').prop('title', 'Close chat');
                 localStorage.clear();
                 io.init(userdata);
             });
@@ -130,7 +133,8 @@
              uiFooterbarUserlistText = (self.uiFooterbarUserlistText = $('<div id="usertab_text"></div>'))
             .appendTo(uiFooterbarUserlistContent)
             .text('Private Chat')
-            .click(function(){
+            .click(function(){ 
+                if(Object.keys(io.uniquesids).length > 1)
                     $("#chat_div").memberlist("option", "boxManager").toggleBox();
             })
 
