@@ -44,5 +44,23 @@ function xmldb_local_vmchat_upgrade($oldversion) {
         // Vmchat savepoint reached.
         upgrade_plugin_savepoint(true, 2014063000, 'local', 'vmchat');
     }
+
+    // Vmchat v1.1.2 release upgrade line
+    if ($oldversion < 2014092300) {
+        // Remove header part.
+        $additionalhtmlhead = preg_replace("/<!-- fcStart -->.*<!-- fcEnd -->/", "", $CFG->additionalhtmlhead);
+        $DB->execute('UPDATE {config} set value = "'.$additionalhtmlhead.'" WHERE name =:hname',
+        array('hname' => 'additionalhtmlhead'));
+
+        // Update header part.
+        $fstring = '<!-- fcStart --><script language = "JavaScript"> var wwwroot="'.
+        $CFG->wwwroot.'/";</script><script type="text/javascript" src = "'.
+        $CFG->wwwroot.'/local/vmchat/include.js"></script><!-- fcEnd -->';
+        $DB->execute('UPDATE {config} set value = concat(value, :fstring) WHERE  name = :hname',
+                array( 'fstring' => $fstring, 'hname' => 'additionalhtmlhead'));
+
+        // Vmchat savepoint reached.
+        upgrade_plugin_savepoint(true, 2014092300, 'local', 'vmchat');
+    }
     return true;
 }

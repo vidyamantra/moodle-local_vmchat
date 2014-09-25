@@ -35,7 +35,7 @@ defined('MOODLE_INTERNAL') || die();
 function xmldb_local_vmchat_uninstall() {
     global $DB, $CFG;
     // Remove footer div.
-    $sql = "UPDATE {config} set value = replace(value, '<div id=\"stickycontainer\"></div>','') where value
+    $sql = "UPDATE {config} set value = replace(value, '<div id = \"stickycontainer\"></div>','') where value
     LIKE '%<div id = \"stickycontainer\"></div>%' and name = 'additionalhtmlfooter'";
     $DB->execute($sql);
     // Remove header html.

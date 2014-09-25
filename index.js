@@ -36,7 +36,7 @@ if (!window.opener) { // Check popup
         return jQuery.ajax( options );
     };
     $.when(
-            $.ajax( wwwroot + "local/vmchat/auth.php" ),
+        $.ajax( wwwroot + "local/vmchat/auth.php" ),
         $.cachedScript( wwwroot + "local/vmchat/bundle/chat/bundle/io/build/iolib.min.js" ),
         $.cachedScript( wwwroot + "local/vmchat/bundle/chat/build/chat.min.js" )
      ).done(function(){
@@ -53,9 +53,6 @@ if (!window.opener) { // Check popup
                 'fastchat_lasttime':'0',
                 'fastchatroom_title':'fastchat',
                 'fastchatroom_name':room};
-         if(localStorage.getItem('init') != 'false') {
-                io.init(userdata);
-         }
 
          $(document).ready(function() {
              counter = 0;
@@ -64,6 +61,10 @@ if (!window.opener) { // Check popup
              $.htab = [];
              $.htabIndex = [];
              vmstorage = {};
+
+             if(localStorage.getItem('init') != 'false') {
+                io.init(userdata);
+             }
 
              $('body').footerbar();// footer bar initialization
 
@@ -86,7 +87,7 @@ if (!window.opener) { // Check popup
                  vmstorage = JSON.parse(localStorage.getItem(sid));
              }
 
-           //checking comman chat local storage
+           //checking common chat local storage
            //Data stored inside sessionStorage variable
            if(sessionStorage.length > 0){
                displaycomChatHistory();
@@ -149,8 +150,9 @@ if (!window.opener) { // Check popup
                 }
                 idList = new Array(); // chatbox
                 $('#stickybar').removeClass('maximize').addClass('minimize');
+                $('#hide_bar input').removeClass('close').addClass('expand');
+                $('#hide_bar input').prop('title', 'Open chat');
                 tabs.tabs( "refresh" );//tabs
-
             });
 
             $(document).on("authentication_failed", function(e) {
