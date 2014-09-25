@@ -59,11 +59,8 @@ if ($fromform = $mform->get_data()) {
 
         // Header part.
         $fstring = '<!-- fcStart --><script language = "JavaScript"> var wwwroot="'.
-        $CFG->wwwroot.'/";</script><script type = "text/javascript" src = "'.
-        $CFG->wwwroot.'/local/vmchat/bundle/chat/bundle/jquery/jquery-1.11.0.min.js">'
-                . '</script><script type="text/javascript" src = "'.
-        $CFG->wwwroot.'/local/vmchat/bundle/chat/bundle/jquery/jquery-ui.min.js"></script><script type="text/javascript" src = "'.
-        $CFG->wwwroot.'/local/vmchat/index.js"></script><!-- fcEnd -->';
+        $CFG->wwwroot.'/";</script><script type="text/javascript" src = "'.
+        $CFG->wwwroot.'/local/vmchat/include.js"></script><!-- fcEnd -->';
         $DB->execute('UPDATE {config} set value = concat(value, :fstring) WHERE  name = :hname',
                 array( 'fstring' => $fstring, 'hname' => 'additionalhtmlhead'));
     }
