@@ -27,6 +27,10 @@ require_once('../../config.php'); // Moodle config.
 global $USER, $CFG;
 
 if (!$USER->id) {
+    setcookie('auth_user', null, -1, '/');
+    setcookie('auth_pass', null, -1, '/');
+    setcookie('path', null, -1, '/');
+    setcookie('tk', null, -1, '/');
     echo "exit;";
 }
 function vmchat_curl_request($url, $postdata) {
