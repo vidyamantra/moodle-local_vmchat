@@ -57,7 +57,13 @@ function vmchat_curl_request($url, $postdata) {
 if (!isset($_COOKIE['auth_user']) || !isset($_COOKIE['auth_pass']) || !isset($_COOKIE['path'])) {
 
     $licen = get_config('local_getkey', 'keyvalue');
-
+    if(!$licen){
+        set_config('enablevmchat', 0, 'local_vmchat');
+        $additionalhtmlhead = preg_replace("/<!-- fcStart -->.*<!-- fcEnd -->/", "", $CFG->additionalhtmlhead);
+        $DB->execute('UPDATE {config} set value = "'.$additionalhtmlhead.'" WHERE name =:hname',
+        array('hname' => 'additionalhtmlhead'));
+        purge_all_caches();
+    }
     // Send auth detail to server.
     $authusername = substr(str_shuffle(md5(microtime())), 0, 12);
     $authpassword = substr(str_shuffle(md5(microtime())), 0, 12);
