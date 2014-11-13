@@ -18,7 +18,7 @@ defined('MOODLE_INTERNAL') || die();
 
 $plugin->component = 'local_vmchat';
 $plugin->version = 2014111300;
-$plugin->release = '1.2.2 (Build: 2014102900)';
+$plugin->release = '1.2.2 (Build: 2014111300)';
 $plugin->requires = 2012120310; // Moodle 2.4.10 or later.
 $plugin->maturity = MATURITY_RC;
 $plugin->dependencies = array('local_getkey' => 2014081300);
