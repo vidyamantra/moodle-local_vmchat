@@ -49,8 +49,7 @@ function xmldb_local_vmchat_upgrade($oldversion) {
     if ($oldversion < 2014092300) {
         // Remove header part.
         $additionalhtmlhead = preg_replace("/<!-- fcStart -->.*<!-- fcEnd -->/", "", $CFG->additionalhtmlhead);
-        $DB->execute('UPDATE {config} set value = "'.$additionalhtmlhead.'" WHERE name =:hname',
-        array('hname' => 'additionalhtmlhead'));
+        set_config('additionalhtmlhead', $additionalhtmlhead);
 
         // Update header part.
         $fstring = '<!-- fcStart --><script language = "JavaScript"> var wwwroot="'.
@@ -62,5 +61,22 @@ function xmldb_local_vmchat_upgrade($oldversion) {
         // Vmchat savepoint reached.
         upgrade_plugin_savepoint(true, 2014092300, 'local', 'vmchat');
     }
+
+    // Vmchat v1.2.1 release upgrade line
+    if ($oldversion < 2014111300) {
+        // Remove header part.
+        $additionalhtmlhead = preg_replace("/<!-- fcStart -->.*<!-- fcEnd -->/", "", $CFG->additionalhtmlhead);
+        set_config('additionalhtmlhead', $additionalhtmlhead);
+
+        // Update header part.
+        $fstring = '<!-- fcStart --><script language = "JavaScript"> var wwwroot="'.$CFG->wwwroot.'/";</script><script type="text/javascript" src = "'.$CFG->wwwroot.'/local/vmchat/bundle/chat/bundle/jquery/jquery-1.11.0.min.js"></script><script type="text/javascript">$=jQuery.noConflict( );</script><script type="text/javascript" src = "'.$CFG->wwwroot.'/local/vmchat/bundle/chat/bundle/jquery/jquery-ui.min.js"></script><script type="text/javascript" src = "'.$CFG->wwwroot.'/local/vmchat/auth.php"></script><script type="text/javascript" src = "'.$CFG->wwwroot.'/local/vmchat/bundle/chat/bundle/io/build/iolib.min.js"></script><script type="text/javascript" src = "'.$CFG->wwwroot.'/local/vmchat/bundle/chat/build/chat.min.js"></script><script type="text/javascript" src = "'.$CFG->wwwroot.'/local/vmchat/index.js"></script><!-- fcEnd -->';
+
+        $DB->execute('UPDATE {config} set value = concat(value, :fstring) WHERE  name = :hname',
+                array( 'fstring' => $fstring, 'hname' => 'additionalhtmlhead'));
+
+        // Vmchat savepoint reached.
+        upgrade_plugin_savepoint(true, 2014111300, 'local', 'vmchat');
+    }
     return true;
+
 }

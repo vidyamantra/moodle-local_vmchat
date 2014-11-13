@@ -28,6 +28,11 @@ class local_vmchat_form extends moodleform {
         $mform =& $this->_form;
         $mform->addElement('checkbox', 'enablevmchat', get_string('enablevmchat', 'local_vmchat'));
         $mform->setDefault('enablevmchat', $this->_customdata['enablevmchat']);
+
+        $mform->addElement('select', 'jqhandle', get_string('jqueryinclude', 'local_vmchat'),array(0 => get_string('autoresolve', 'local_vmchat'), 1 => get_string('dontinclude', 'local_vmchat')));
+        $mform->addHelpButton('jqhandle', 'jqueryinclude', 'local_vmchat');
+        $mform->setDefault('jqhandle', $this->_customdata['jqhandle']);
+
         $this->add_action_buttons($cancel = false);
     }
 }

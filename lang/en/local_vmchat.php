@@ -23,3 +23,7 @@ $string['pagenotfound'] = 'Page not found';
 $string['enablevmchat'] = 'Enable vmchat';
 $string['configervmchat'] = 'Enable this option if you want to add vmchat.';
 $string['changesnotsaved'] = 'Changes not saved';
+$string['jqueryinclude'] = 'How to deal with jQuery';
+$string['autoresolve'] = 'AutoResolve';
+$string['dontinclude'] = 'Don\'t Include';
+$string['jqueryinclude_help'] = 'Choose correct option to resolve jQuery conflict. If your site or theme already using jQuery then select Don\'t Include option.';

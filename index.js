@@ -24,22 +24,7 @@ if (!window.opener) { // Check popup
         link.media = 'all';
         head.appendChild(link);
     }
-    jQuery.cachedScript = function( url, options ) {
-        // Allow user to set any option except for dataType, cache, and url
-        options = $.extend( options || {}, {
-            dataType: "script",
-            cache: true,
-            url: url
-        });
-        // Use $.ajax() since it is more flexible than $.getScript
-        // Return the jqXHR object so we can chain callbacks
-        return jQuery.ajax( options );
-    };
-    $.when(
-        $.ajax( wwwroot + "local/vmchat/auth.php" ),
-        $.cachedScript( wwwroot + "local/vmchat/bundle/chat/bundle/io/build/iolib.min.js" ),
-        $.cachedScript( wwwroot + "local/vmchat/bundle/chat/build/chat.min.js" )
-     ).done(function(){
+
          $.uiBackCompat = false;
          var userobj = {'userid':id,'name':fname,'lname':lname,'img':imageurl};
          var room = tk + '-main-c-room';//ToDo:
@@ -179,5 +164,4 @@ if (!window.opener) { // Check popup
                     localStorage.setItem(sid, data);
             });
        });
-    });
 };
