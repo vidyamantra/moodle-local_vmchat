@@ -66,15 +66,16 @@ if (!isset($_COOKIE['auth_user']) || !isset($_COOKIE['auth_pass']) || !isset($_C
     $licen = get_config('local_getkey', 'keyvalue');
     if(!$licen){
         disable_vmchat();
+        $rid="";
+    }{
+        // Send auth detail to server.
+        $authusername = substr(str_shuffle(md5(microtime())), 0, 12);
+        $authpassword = substr(str_shuffle(md5(microtime())), 0, 12);
+        $postdata = array('authuser' => $authusername, 'authpass' => $authpassword, 'licensekey' => $licen);
+        $postdata = json_encode($postdata);
+    
+        $rid = vmchat_curl_request("https://c.vidya.io", $postdata); // REMOVE HTTP.
     }
-    // Send auth detail to server.
-    $authusername = substr(str_shuffle(md5(microtime())), 0, 12);
-    $authpassword = substr(str_shuffle(md5(microtime())), 0, 12);
-    $postdata = array('authuser' => $authusername, 'authpass' => $authpassword, 'licensekey' => $licen);
-    $postdata = json_encode($postdata);
-
-    $rid = vmchat_curl_request("https://c.vidya.io", $postdata); // REMOVE HTTP.
-
     if (empty($rid) or strlen($rid) > 32) {
         echo "Chat server is unavailable!";
         echo "alert('Chat server is unavailable!');";
