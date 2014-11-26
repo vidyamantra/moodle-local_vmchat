@@ -59,6 +59,7 @@ function disable_vmchat(){
     $additionalhtmlhead = preg_replace("/<!-- fcStart -->.*<!-- fcEnd -->/", "", $CFG->additionalhtmlhead);
     set_config('additionalhtmlhead', $additionalhtmlhead);
     purge_all_caches();
+    exit;
 }
 
 if (!isset($_COOKIE['auth_user']) || !isset($_COOKIE['auth_pass']) || !isset($_COOKIE['path'])) {
@@ -66,7 +67,6 @@ if (!isset($_COOKIE['auth_user']) || !isset($_COOKIE['auth_pass']) || !isset($_C
     $licen = get_config('local_getkey', 'keyvalue');
     if(!$licen){
         disable_vmchat();
-        $rid="";
     } else {
         // Send auth detail to server.
         $authusername = substr(str_shuffle(md5(microtime())), 0, 12);
