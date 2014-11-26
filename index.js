@@ -28,16 +28,14 @@ if (!window.opener) { // Check popup
          $.uiBackCompat = false;
          var userobj = {'userid':id,'name':fname,'lname':lname,'img':imageurl};
          var room = tk + '-main-c-room';//ToDo:
-         userdata = {
+         dataobject = {
                 'userid':id,
                 'sid':sid,
                 'rid': path,
                 'authuser':auth_user,
                 'authpass':auth_pass,
                 'userobj': userobj,
-                'fastchat_lasttime':'0',
-                'fastchatroom_title':'fastchat',
-                'fastchatroom_name':room};
+                'room':room};
 
          $(document).ready(function() {
              counter = 0;
@@ -48,7 +46,7 @@ if (!window.opener) { // Check popup
              vmstorage = {};
 
              if(localStorage.getItem('init') != 'false') {
-                io.init(userdata);
+                io.init(dataobject);
              }
 
              $('body').footerbar();// footer bar initialization
