@@ -43,19 +43,17 @@ $.when(
      var userobj = {'userid':id,'name':name,'img':imageurl};
      var room = 'main-c-room';//ToDo:
 
-     userdata = {
+     dataobject = {
             'userid':id,
             'sid':'212',
             'rid': path,
             'authuser':auth_user,
             'authpass':auth_pass,
             'userobj': userobj,
-            'fastchat_lasttime':'0',
-            'fastchatroom_title':'fastchat',
-            'fastchatroom_name':room};
+            'room':room};
 
      if(localStorage.getItem('init') != 'false'){
-            io.init(userdata);
+            io.init(dataobject);
      }
 
      $(document).ready(function(){
