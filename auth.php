@@ -67,7 +67,7 @@ if (!isset($_COOKIE['auth_user']) || !isset($_COOKIE['auth_pass']) || !isset($_C
     if(!$licen){
         disable_vmchat();
         $rid="";
-    }{
+    } else {
         // Send auth detail to server.
         $authusername = substr(str_shuffle(md5(microtime())), 0, 12);
         $authpassword = substr(str_shuffle(md5(microtime())), 0, 12);
