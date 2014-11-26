@@ -43,20 +43,15 @@ $.when(
      var userobj = {'userid':id,'name':name,'img':imageurl};
      var room = 'main-c-room';//ToDo:
 
-     userdata = {
+     dataobject = {
             'userid':id,
             'sid':'212',
             'rid': path,
             'authuser':auth_user,
             'authpass':auth_pass,
             'userobj': userobj,
-            'fastchat_lasttime':'0',
-            'fastchatroom_title':'fastchat',
-            'fastchatroom_name':room};
+            'room':room};
 
-     if(localStorage.getItem('init') != 'false'){
-            io.init(userdata);
-     }
 
      $(document).ready(function(){
          counter = 0;
@@ -65,6 +60,10 @@ $.when(
          $.htab = [];
          $.htabIndex = [];
          vmstorage = {};
+         
+        if(localStorage.getItem('init') != 'false') {
+            io.init(dataobject);
+        }
 
          $('body').footerbar();
 
@@ -75,7 +74,7 @@ $.when(
          tabs = $('#tabs').tabs({ cache: true, activeOnAdd: true});
 
          if (browserSupportsLocalStorage() == false)  { // check browser for local storage
-             alert(lang.sterror);
+             display_error(lang.sterror);
              return;
          }
          // checking private chat local storage
@@ -150,6 +149,8 @@ $.when(
             }
             idList = new Array(); // chatbox
             $('#stickybar').removeClass('maximize').addClass('minimize');
+            $('#hide_bar input').removeClass('close').addClass('expand');
+            $('#hide_bar input').prop('title', 'Open chat');
             tabs.tabs( "refresh" );//tabs
          });
 
