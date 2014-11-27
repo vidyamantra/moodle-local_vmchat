@@ -73,7 +73,7 @@
                 $('#hide_bar input').removeClass('expand').addClass('close');
                 $('#hide_bar input').prop('title', 'Close chat');
                 localStorage.clear();
-                io.init(userdata);
+                io.init(dataobject);
             });
 
             //chatroom tab
