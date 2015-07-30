@@ -86,6 +86,7 @@ if (!isset($_COOKIE['auth_user']) || !isset($_COOKIE['auth_pass']) || !isset($_C
             disable_vmchat();
             exit;
         }
+        $rid = "wss://$rid";
     } else {
         $rid = "ws://127.0.0.1:8080";
     }
