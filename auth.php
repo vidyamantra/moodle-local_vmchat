@@ -63,30 +63,32 @@ function disable_vmchat(){
 }
 
 if (!isset($_COOKIE['auth_user']) || !isset($_COOKIE['auth_pass']) || !isset($_COOKIE['path'])) {
-
-    $licen = get_config('local_getkey', 'keyvalue');
-    if(!$licen){
-        disable_vmchat();
+    if (true) { // False for local server deployment
+        $licen = get_config('local_getkey', 'keyvalue');
+        if(!$licen){
+            disable_vmchat();
+        } else {
+            // Send auth detail to server.
+            $authusername = substr(str_shuffle(md5(microtime())), 0, 12);
+            $authpassword = substr(str_shuffle(md5(microtime())), 0, 12);
+            $postdata = array('authuser' => $authusername, 'authpass' => $authpassword, 'licensekey' => $licen);
+            $postdata = json_encode($postdata);
+        
+            $rid = vmchat_curl_request("https://c.vidya.io", $postdata); // REMOVE HTTP.
+        }
+        if (empty($rid) or strlen($rid) > 32) {
+            echo "Chat server is unavailable!";
+            echo "alert('Chat server is unavailable!');";
+            exit;
+        }
+        if ($rid == 'Rejected - Key Not Active') {
+            echo "alert('VmChat license key is not valid');exit;";
+            disable_vmchat();
+            exit;
+        }
     } else {
-        // Send auth detail to server.
-        $authusername = substr(str_shuffle(md5(microtime())), 0, 12);
-        $authpassword = substr(str_shuffle(md5(microtime())), 0, 12);
-        $postdata = array('authuser' => $authusername, 'authpass' => $authpassword, 'licensekey' => $licen);
-        $postdata = json_encode($postdata);
-    
-        $rid = vmchat_curl_request("https://c.vidya.io", $postdata); // REMOVE HTTP.
+        $rid = "ws://127.0.0.1:8080";
     }
-    if (empty($rid) or strlen($rid) > 32) {
-        echo "Chat server is unavailable!";
-        echo "alert('Chat server is unavailable!');";
-        exit;
-    }
-    if ($rid == 'Rejected - Key Not Active') {
-        echo "alert('VmChat license key is not valid');exit;";
-        disable_vmchat();
-        exit;
-    }
-
     setcookie('auth_user', $authusername, 0, '/');
     setcookie('auth_pass', $authpassword, 0, '/');
     setcookie('path', $rid, 0, '/');
