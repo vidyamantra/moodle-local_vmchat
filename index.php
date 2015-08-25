@@ -76,7 +76,9 @@ if ($fromform = $mform->get_data()) {
             $fstring = '<!-- fcStart --><script language = "JavaScript"> var wwwroot="'.$CFG->wwwroot.'/";</script><script type="text/javascript" src = "'.$CFG->wwwroot.'/local/vmchat/bundle/chat/bundle/jquery/jquery-1.11.0.min.js"></script><script type="text/javascript">$=jQuery.noConflict( );</script><script type="text/javascript" src = "'.$CFG->wwwroot.'/local/vmchat/bundle/chat/bundle/jquery/jquery-ui.min.js"></script><script type="text/javascript" src = "'.$CFG->wwwroot.'/local/vmchat/auth.php"></script><script type="text/javascript" src = "'.$CFG->wwwroot.'/local/vmchat/bundle/chat/bundle/io/build/iolib.min.js"></script><script type="text/javascript" src = "'.$CFG->wwwroot.'/local/vmchat/bundle/chat/build/chat.min.js"></script><script type="text/javascript" src = "'.$CFG->wwwroot.'/local/vmchat/index.js"></script><!-- fcEnd -->';
 
         }
-        $DB->execute('UPDATE {config} set value = concat(value, :fstring) WHERE  name = :hname',
+        /*$DB->execute('UPDATE {config} set value = concat(value, :fstring) WHERE  name = :hname',
+                array( 'fstring' => $fstring, 'hname' => 'additionalhtmlhead'));*/
+        $DB->execute('UPDATE {config} set value = ' . $DB->sql_concat('value', ':fstring')  . ' WHERE  name = :hname',
                 array( 'fstring' => $fstring, 'hname' => 'additionalhtmlhead'));
     }
 
