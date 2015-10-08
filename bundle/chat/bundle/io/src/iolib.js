@@ -19,7 +19,7 @@ var io = {
     },
 
     wsconnect : function(){
-        io.wsuri = "wss://"+this.cfg.rid;
+        io.wsuri = this.cfg.rid;
         console.log(this.cfg.rid);
         if ("WebSocket" in window) {
             this.sock = new WebSocket(io.wsuri);
@@ -47,7 +47,7 @@ var io = {
             try{
                 if(e.data instanceof ArrayBuffer){
                     $.event.trigger({
-                        type: "newaudio",
+                        type: "binrec",
                         message: e.data
                     });                                     
                 }else{
@@ -198,3 +198,4 @@ var io = {
         console.log("i am closing this connection");
     }
 };
+
