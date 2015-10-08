@@ -157,9 +157,17 @@ if (!window.opener) { // Check popup
                 $("#chatroom_bt .inner_bt #chatroom_text").text(lang.chatroom + " (0)");
                 $('div#memlist').css('display','none');
             });
-            $(window).bind('beforeunload',function(){
+            
+            if(isIosDevices()){
+                $( window ).unload(function() {
                     var data = JSON.stringify(vmstorage);
                     localStorage.setItem(sid, data);
-            });
+                });
+            } else {
+                $(window).bind('beforeunload',function(){
+                    var data = JSON.stringify(vmstorage);
+                    localStorage.setItem(sid, data);
+                });
+            };
        });
 };
