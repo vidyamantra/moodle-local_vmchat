@@ -275,3 +275,12 @@ function display_error(msg){
     $("#dialog").html(msg);
     $('#dialog').dialog();
 }
+
+/*
+    Check iOs device
+*/    
+function isIosDevices(){
+    var ua = navigator.userAgent;
+    var isiPad = /iPad/i.test(ua) || /iPhone OS 3_1_2/i.test(ua) || /iPhone OS 3_2_2/i.test(ua);
+    return isiPad;
+}
