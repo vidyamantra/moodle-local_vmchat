@@ -6,7 +6,8 @@
  * @copyright  2014 Pinky Sharma  {@link http://vidyamantra.com}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
-var io = {
+define(['jquery'], function($) {
+return io = {
     cfg : {},
     sock : null,
     wsuri : null,
@@ -27,7 +28,8 @@ var io = {
             this.sock = new MozWebSocket(io.wsuri);
         } else {
             console.log("Browser does not support WebSocket!");
-            this.error = lang.wserror;
+            //this.error = lang.wserror;
+            this.error = "Browser does not support WebSocket";
         }
         var scope = this;
         this.sock.onopen = function() {
@@ -198,4 +200,4 @@ var io = {
         console.log("i am closing this connection");
     }
 };
-
+});
