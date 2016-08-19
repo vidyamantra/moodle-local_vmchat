@@ -35,9 +35,16 @@ $sid = session_id();
             <?php echo "id='".$_GET['id']."';"; ?>
             <?php echo "sid='".$sid."';";?>
         </script>
+<!--
         <script type="text/javascript" src="./bundle/jquery/jquery-1.11.0.min.js"></script>
         <script type="text/javascript" src="./bundle/jquery/jquery-ui.min.js"></script>
-        <script type="text/javascript" src="index.js"></script>
+-->
+        <link rel="stylesheet" type="text/css" href="./bundle/jquery/css/base/jquery-ui.css">
+        <link rel="stylesheet" type="text/css" href="./css/jquery.ui.chatbox.css">
+<!--         <link rel="stylesheet" type="text/css" href="http://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/css/bootstrap.min.css"> -->
+        <script data-main="index.js" src="bundle/requirejs/require.js"></script>
+        
+        
     </head>
     <body>
         <p>It will not work until necessary scripts and stylesheets are properly loaded, check out the code.</p> 

@@ -1,5 +1,7 @@
+define(['jquery', 'jqueryui', 'src/chatboxManager', 'bundle/io/src/iolib','src/lib','src/lang.en'/*,'src/uichatlist', 'src/uichatroom'*/,'src/footerToggel'], function($, jui, chatboxManager, io, clib, lang) {
+
 // widget for footer bar
-(function($){
+//(function($){
     $.widget("ui.footerbar", {
         options: {
             id: null, //id for the DOM element
@@ -48,7 +50,7 @@
                     $('.ui-memblist').remove();
                     $('.ui-chatbox').remove();
                     $('div#chatrm').remove();
-                    chatroombox = null;
+                    clib.chatroombox = null;
 
                     // delete open chat box
                     for(key in io.uniquesids){
@@ -92,7 +94,7 @@
             .appendTo(uiFooterbarchatroomContent)
             .text('Chatroom')
             .click(function(){
-                if(chatroombox){
+                if(clib.chatroombox){
 
                     if(sessionStorage.getItem('chatroom_status') == 'hidden'){
                        sessionStorage.removeItem('chatroom_status');
@@ -100,7 +102,7 @@
                    }else{
                        sessionStorage.setItem("chatroom_status", "hidden");
                    }
-                   chatroombox.chatroom("option", "boxManager").toggleBox();
+                   clib.chatroombox.chatroom("option", "boxManager").toggleBox();
                 }else{
 
                     if($("div#chat_room").length == 0){
@@ -108,7 +110,7 @@
                         d.id = 'chat_room';
                         document.body.appendChild(d);
 
-                        chatroombox = $("#chat_room").chatroom({id:"chat_room",
+                        clib.chatroombox = $("#chat_room").chatroom({id:"chat_room",
                                                 user:{'name':'test'},
                                                 title : lang.chatroom_header,
                                                 offset: '20px',
@@ -160,12 +162,12 @@
         _setWidth: function(width) {
             this.uiFooterbar.width(width + "px");
          }
-
     });
 
-}(jQuery));
+//});
 
 
+/*
 (function($) {
     $.fn.clickToggle = function(func1, func2) {
         var funcs = [func1, func2];
@@ -178,4 +180,6 @@
         });
         return this;
     };
-}(jQuery));
+});
+*/
+});

@@ -1,4 +1,4 @@
-var cssId = 'myCss';
+/*var cssId = 'myCss';
 if (!document.getElementById(cssId))
 {
     var head  = document.getElementsByTagName('head')[0];
@@ -34,12 +34,39 @@ jQuery.cachedScript = function( url, options ) {
 };
 
 $.when(
-    $.cachedScript( "bundle/io/build/iolib.min.js" ),
-    $.cachedScript( "build/chat.min.js" )
+    //$.cachedScript( "bundle/io/build/iolib.min.js" ),
+    //$.cachedScript( "build/chat.min.js" )
+    $.cachedScript( "bundle/io/src/iolib.js" ),
+    $.cachedScript( "src/footer.js" ),
+    $.cachedScript( "src/jquery.ui.chatlist.js" ),
+    $.cachedScript( "src/jquery.ui.chatbox.js" ),
+    $.cachedScript( "src/jquery.ui.chatroom.js" ),
+    $.cachedScript( "src/chatboxManager.js" ),
+    $.cachedScript( "src/lib.js" ),
+    $.cachedScript( "src/lang.en.js" )
 
- ).done(function(){
+ ).done(function(){*/
+require.config({
+//   baseUrl: "bundle",
+  paths: {
+    jquery: '//code.jquery.com/jquery-1.12.4',
+    jqueryui: '//code.jquery.com/ui/1.12.0/jquery-ui',
+    bootstrap :  '//maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.3/js/bootstrap.min'
+  },
+  shim : {
+        "bootstrap" : { "deps" :['jquery'] }
+    }
+});
 
-     $.uiBackCompat = false;
+/*
+define('jquery-private', ['jquery'], function (jq) {
+    return jq.noConflict( true );
+});
+*/
+
+define(['jquery', 'jqueryui', 'bundle/io/src/iolib','src/lang.en', 'src/chatboxManager','src/lib','src/window','src/footer', 'src/uichatlist','src/uichatbox', 'src/uichatroom'], function($, jui, io,lang, chatboxManager, clib, window) {
+  
+     //$.uiBackCompat = false;
      var userobj = {'userid':id,'name':name,'img':imageurl};
      var room = 'main-c-room';//ToDo:
 
@@ -52,7 +79,6 @@ $.when(
             'userobj': userobj,
             'room':room};
 
-
      $(document).ready(function(){
          counter = 0;
          idList = new Array();
@@ -60,35 +86,43 @@ $.when(
          $.htab = [];
          $.htabIndex = [];
          vmstorage = {};
-         
+
+        if (clib.browserSupportsLocalStorage() == false)  { // check browser for local storage
+             clib.display_error(lang.sterror);
+             return;
+        }
+
         if(localStorage.getItem('init') != 'false') {
             io.init(dataobject);
         }
 
-         $('body').footerbar();
+        $('body').footerbar();
 
-         if(localStorage.getItem('init') == 'false'){ // check footer is close
+        if(localStorage.getItem('init') == 'false'){ // check footer is close
              $('#stickybar').removeClass('maximize').addClass('minimize');
              $('#hide_bar input').removeClass('close').addClass('expand');
-         }
-         tabs = $('#tabs').tabs({ cache: true, activeOnAdd: true});
+        }
+        tabs = $('#tabs').tabs({ cache: true, activeOnAdd: true});
 
-         if (browserSupportsLocalStorage() == false)  { // check browser for local storage
-             display_error(lang.sterror);
+/*
+        if (clib.browserSupportsLocalStorage() == false)  { // check browser for local storage
+             clib.display_error(lang.sterror);
              return;
-         }
+        }
+*/
          // checking private chat local storage
          // Data stored in session key inside localStorage variable
          // sid is the session id
          if (localStorage.getItem(sid) != null)  {
-             displayChatHistory();
+             clib.displayChatHistory();
              vmstorage = JSON.parse(localStorage.getItem(sid));
          }
 
          //checking common chat local storage
          //Data stored inside sessionStorage variable
-         if(sessionStorage.length > 0){
-             displaycomChatHistory();
+         if(sessionStorage.length > 0){ 
+             clib.displaycomChatHistory();
+             //console.log(clib.chatroombox);
          }
 
          /* Remove user tab and chatbox when click on tab close icon */
@@ -123,13 +157,13 @@ $.when(
          });
 
          $(document).on("member_added", function(e){
-             memberUpdate(e);
+             clib.memberUpdate(e);
          });
          $(document).on("member_removed", function(e){
-             memberUpdate(e);
+             clib.memberUpdate(e);
          });
          $(document).on("newmessage", function(e){
-             messageUpdate(e);
+             clib.messageUpdate(e);
          });
          $(document).on("Multiple_login", function(e){
             //if same user login multiple times then
@@ -138,7 +172,7 @@ $.when(
             $('.ui-memblist').remove();
             $('.ui-chatbox').remove();
             $('div#chatrm').remove();
-            chatroombox = null;
+            clib.chatroombox = null;
 
             // delete open chat box
             for(key in io.uniquesids){
@@ -159,12 +193,12 @@ $.when(
             document.cookie = "auth_user=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
             document.cookie = "auth_pass=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
             document.cookie = "path=; expires=Thu, 01 Jan 1970 00:00:00 GMT; path=/";
-            display_error(e.message);
+            clib.display_error(e.message);
          });
 
          $(document).on("error", function(e){
             if(typeof e.message != 'object'){
-                display_error(e.message);
+                clib.display_error(e.message);
             }
          });
 
@@ -174,12 +208,34 @@ $.when(
              $("#chatroom_bt .inner_bt #chatroom_text").text(lang.chatroom + " (0)");
              $('div#memlist').css('display','none');
          });
-
-        if(isIosDevices()){
-            $( window ).unload(function() {
+         
+         //TODO: check ios private mode
+        
+        if(clib.isIosDevices()){ 
+            //window.unload(function() {
+            //$(window).on('unload', function() {
+            //window.onload = function() {
+/*
+            $(document).on("pageshow",function(){
+                console.log("before load");
+            });
+*/
+/*
+            window.addEventListener("pageshide", function(evt){
+            alert('show');
+        }, false);
+*/
+/*
+            if(document.readyState === "complete"){
+                console.log('window loaded');
+                var data = JSON.stringify(vmstorage);
+                localStorage.setItem(sid, data);
+            };
+*/          $(window).bind('pagehide',function(){
                 var data = JSON.stringify(vmstorage);
                 localStorage.setItem(sid, data);
             });
+
         } else {
             $(window).bind('beforeunload',function(){
                 var data = JSON.stringify(vmstorage);
@@ -187,4 +243,14 @@ $.when(
             });
         };
    });
-});
+/*
+   if(clib.isIosDevices()){
+       $(window).bind('pagehide',function(){
+                var data = JSON.stringify(vmstorage);
+                localStorage.setItem(sid, data);
+            });
+    }
+*/
+ 
+//});
+})

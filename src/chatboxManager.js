@@ -1,3 +1,4 @@
+define(['jquery'], function($) {
 // Need this to make IE happy
 if(!Array.indexOf){
     Array.prototype.indexOf = function(obj){
@@ -125,3 +126,5 @@ var chatboxManager = function() {
         dispatch : dispatch
     };
 }();
+return chatboxManager;
+});
