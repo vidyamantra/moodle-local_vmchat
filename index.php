@@ -67,15 +67,15 @@ if ($fromform = $mform->get_data()) {
         // Remove header html.
         $additionalhtmlhead = preg_replace("/<!-- fcStart -->.*<!-- fcEnd -->/", "", $CFG->additionalhtmlhead);
         set_config('additionalhtmlhead', $additionalhtmlhead);
-        if(!empty($fromform->jqhandle)){
+        //if(!empty($fromform->jqhandle)){
             // Add header html.
-            $fstring = '<!-- fcStart --><script language = "JavaScript"> var wwwroot="'.$CFG->wwwroot.'/";</script><script type="text/javascript" src = "'.$CFG->wwwroot.'/local/vmchat/bundle/chat/bundle/jquery/jquery-ui.min.js"></script><script type="text/javascript" src = "'.$CFG->wwwroot.'/local/vmchat/auth.php"></script><script type="text/javascript" src = "'.$CFG->wwwroot.'/local/vmchat/bundle/chat/bundle/io/build/iolib.min.js"></script><script type="text/javascript" src = "'.$CFG->wwwroot.'/local/vmchat/bundle/chat/build/chat.min.js"></script><script type="text/javascript" src = "'.$CFG->wwwroot.'/local/vmchat/index.js"></script><!-- fcEnd -->';
+            $fstring = '<script language = "JavaScript"> var wwwroot="'.$CFG->wwwroot.'/";</script><!-- fcStart --><script type="text/javascript" src = "'.$CFG->wwwroot.'/local/vmchat/auth.php"></script></script><script type="text/javascript"> window.onload = function (){ require([\'core/first\'], function(){ require(["local_vmchat/vmchat"], function(amd) { amd.init("'.$CFG->wwwroot.'/"); });});}</script><!-- fcEnd -->';
 
-        }else{
+       /* }else{
             // Add header html.
             $fstring = '<!-- fcStart --><script language = "JavaScript"> var wwwroot="'.$CFG->wwwroot.'/";</script><script type="text/javascript" src = "'.$CFG->wwwroot.'/local/vmchat/bundle/chat/bundle/jquery/jquery-1.11.0.min.js"></script><script type="text/javascript">$=jQuery.noConflict( );</script><script type="text/javascript" src = "'.$CFG->wwwroot.'/local/vmchat/bundle/chat/bundle/jquery/jquery-ui.min.js"></script><script type="text/javascript" src = "'.$CFG->wwwroot.'/local/vmchat/auth.php"></script><script type="text/javascript" src = "'.$CFG->wwwroot.'/local/vmchat/bundle/chat/bundle/io/build/iolib.min.js"></script><script type="text/javascript" src = "'.$CFG->wwwroot.'/local/vmchat/bundle/chat/build/chat.min.js"></script><script type="text/javascript" src = "'.$CFG->wwwroot.'/local/vmchat/index.js"></script><!-- fcEnd -->';
 
-        }
+        }*/
         /*$DB->execute('UPDATE {config} set value = concat(value, :fstring) WHERE  name = :hname',
                 array( 'fstring' => $fstring, 'hname' => 'additionalhtmlhead'));*/
         $DB->execute('UPDATE {config} set value = ' . $DB->sql_concat('value', ':fstring')  . ' WHERE  name = :hname',
@@ -98,6 +98,7 @@ if ($fromform = $mform->get_data()) {
     unset($fromform->enablevmchat);
     purge_all_caches();
 }
+//$PAGE->requires->js_call_amd('local_vmchat/vmchat', 'init', [$CFG->wwwroot.'/']);
 
 echo $OUTPUT->header();
 

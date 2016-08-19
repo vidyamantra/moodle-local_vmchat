@@ -51,8 +51,8 @@ if (!window.opener) { // Check popup
         }
         if(typeof $('body').footerbar != 'function'){
             $.extend( vcJQuery );// If not found footerbar method then use vm_chat jQuery instance
-        } 
-       
+        }
+      
         $('body').footerbar();// footer bar initialization
         
         if(localStorage.getItem('init') == 'false'){ // check footer is close
