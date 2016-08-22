@@ -478,7 +478,10 @@ a.ui-tabs-anchor{
 #stickycontainer{
     height: 40px;
 }
-
+/*For moodle login page*/
+body.notloggedin #stickycontainer{
+    height: 0;
+}
 /*.ui-widget *,
 .ui-widget *:before,
 .ui-widget *:after {
