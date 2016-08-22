@@ -35,12 +35,12 @@ defined('MOODLE_INTERNAL') || die();
 function xmldb_local_vmchat_uninstall() {
     global $DB, $CFG;
     // Remove footer div.
-    $sql = "UPDATE {config} set value = replace(value, '<div id = \"stickycontainer\"></div>','') where value
-    LIKE '%<div id = \"stickycontainer\"></div>%' and name = 'additionalhtmlfooter'";
+    $sql = "UPDATE {config} set value = replace(value, '<div id=\"stickycontainer\"></div>','') "
+                . "where value LIKE '%<div id=\"stickycontainer\"></div>%' and name='additionalhtmlfooter'";
     $DB->execute($sql);
     // Remove header html.
     $additionalhtmlhead = preg_replace("/<!-- fcStart -->.*<!-- fcEnd -->/", "", $CFG->additionalhtmlhead);
-    $DB->execute('UPDATE {config} set value = "'.$additionalhtmlhead.'" WHERE name =:hname',
-    array('hname' => 'additionalhtmlhead'));
+    set_config('additionalhtmlhead', $additionalhtmlhead);
+    //$DB->execute('UPDATE {config} set value = "'.$additionalhtmlhead.'" WHERE name =:hname', array('hname' => 'additionalhtmlhead'));
     return true;
 }

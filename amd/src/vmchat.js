@@ -1,17 +1,15 @@
 if (!window.opener) { // Check popup
+
+if (typeof wwwroot == 'undefined') {
+    wwwroot = '';
+}
+
 require.config({
+    baseUrl: wwwroot + 'local/vmchat/bundle/chat/',
     paths: {
-        'bundle/io/src/iolib': wwwroot + 'local/vmchat/bundle/chat/bundle/io/src/iolib',
-        'src/lang.en': wwwroot + 'local/vmchat/bundle/chat/src/lang.en',
-        'src/chatboxManager': wwwroot + 'local/vmchat/bundle/chat/src/chatboxManager', 
-        'src/lib': wwwroot + 'local/vmchat/bundle/chat/src/lib', 
-        'src/window': wwwroot + 'local/vmchat/bundle/chat/src/window', 
-        'src/footer': wwwroot + 'local/vmchat/bundle/chat/src/footer', 
-        'src/uichatlist': wwwroot + 'local/vmchat/bundle/chat/src/uichatlist', 
-        'src/uichatbox': wwwroot + 'local/vmchat/bundle/chat/src/uichatbox', 
-        'src/uichatroom': wwwroot + 'local/vmchat/bundle/chat/src/uichatroom',
-        'src/footerToggel': wwwroot + 'local/vmchat/bundle/chat/src/footerToggel'
-    }
+        'bundle/io/src/iolib': 'bundle/io/src/iolib'
+    },
+    waitSeconds: 0
 });
 
 
