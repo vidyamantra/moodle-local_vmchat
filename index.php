@@ -44,37 +44,18 @@ $errormsg = '';
 if ($fromform = $mform->get_data()) {
 
     $enablevmchat = isset($fromform->enablevmchat) ? $fromform->enablevmchat : 0;
-    //$jqhandle = isset($fromform->jqhandle) ? $fromform->jqhandle : 0;
 
-/*
-    if(!set_config('jqhandle', $jqhandle, 'local_vmchat')){
-        $errormsg = get_string('changesnotsaved', 'local_vmchat');
-    }
-*/
     if (!set_config('enablevmchat', $enablevmchat, 'local_vmchat')) {
         $errormsg = get_string('changesnotsaved', 'local_vmchat');
     } else {
         $statusmsg = get_string('changessaved');
     }
 
-    preg_match("/<!-- fcStart -->.*<!-- fcEnd -->/", $CFG->additionalhtmlhead, $m);// Check header already exist.
-    //if (!empty($fromform->enablevmchat) && empty($m)) {
     if (!empty($fromform->enablevmchat)) {
-        //if($fromform->enablevmchat != $value){
         // Footer part.
         $sql = "UPDATE {config} SET value = concat(value, "
                 . "'<div id=\"stickycontainer\"></div>') WHERE name = 'additionalhtmlfooter'";
         $DB->execute($sql);
-        //}
-        // Header part.
-        // Remove header html.
-        $additionalhtmlhead = preg_replace("/<!-- fcStart -->.*<!-- fcEnd -->/", "", $CFG->additionalhtmlhead);
-        set_config('additionalhtmlhead', $additionalhtmlhead);
-            // Add header html.
-            $fstring = '<!-- fcStart --><script language = "JavaScript"> var wwwroot="'.$CFG->wwwroot.'/";</script><script type="text/javascript" src = "'.$CFG->wwwroot.'/local/vmchat/auth.php"></script><script type="text/javascript"> window.onload = function (){ require([\'core/first\'], function(){ require(["local_vmchat/vmchat"], function(amd) { amd.init("'.$CFG->wwwroot.'/"); });});}</script><!-- fcEnd -->';
-
-        $DB->execute('UPDATE {config} set value = ' . $DB->sql_concat('value', ':fstring')  . ' WHERE  name = :hname',
-                array( 'fstring' => $fstring, 'hname' => 'additionalhtmlhead'));
     }
 
     // Disable vmchat.
@@ -83,17 +64,14 @@ if ($fromform = $mform->get_data()) {
         $sql = "UPDATE {config} set value = replace(value, '<div id=\"stickycontainer\"></div>','') "
                 . "where value LIKE '%<div id=\"stickycontainer\"></div>%' and name='additionalhtmlfooter'";
         $DB->execute($sql);
-
-        // Remove header html.
-        $additionalhtmlhead = preg_replace("/<!-- fcStart -->.*<!-- fcEnd -->/", "", $CFG->additionalhtmlhead);
-        set_config('additionalhtmlhead', $additionalhtmlhead);
-
-        //set_config('jqhandle', 0, 'local_vmchat');
+        setcookie('auth_user', null, -1, '/');
+        setcookie('auth_pass', null, -1, '/');
+        setcookie('path', null, -1, '/');
+        setcookie('tk', null, -1, '/');
     }
     unset($fromform->enablevmchat);
     purge_all_caches();
 }
-//$PAGE->requires->js_call_amd('local_vmchat/vmchat', 'init', [$CFG->wwwroot.'/']);
 
 echo $OUTPUT->header();
 

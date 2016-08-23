@@ -17,7 +17,7 @@ require.config({
 
     return {
         init: function(wwwroot) {
-
+            
             var cssId = 'myCss';
             if (!document.getElementById(cssId))
             {
