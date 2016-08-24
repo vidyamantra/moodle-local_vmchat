@@ -7,13 +7,13 @@ if (typeof wwwroot == 'undefined') {
 require.config({
     baseUrl: wwwroot + 'local/vmchat/bundle/chat/',
     paths: {
-        'bundle/io/src/iolib': 'bundle/io/src/iolib'
+        'bundle/io/build/iolib': 'bundle/io/build/iolib'
     },
     waitSeconds: 0
 });
 
 
-   define(['jquery', 'jqueryui', 'bundle/io/src/iolib', 'src/lang.en', 'src/chatboxManager', 'src/lib', 'src/window', 'src/footer', 'src/uichatlist', 'src/uichatbox', 'src/uichatroom'], function($, jui, io, lang, chatboxManager, clib, window) {
+   define(['jquery', 'jqueryui', 'bundle/io/build/iolib', 'build/lang.en', 'build/chatboxManager', 'build/lib', 'build/window', 'build/footer', 'build/uichatlist', 'build/uichatbox', 'build/uichatroom'], function($, jui, io, lang, chatboxManager, clib, window) {
 
     return {
         init: function(wwwroot) {
@@ -95,7 +95,7 @@ require.config({
                 
                 //checking common chat local storage
                 //Data stored inside sessionStorage variable
-                if(sessionStorage.length > 0){
+                if(sessionStorage.length > 0 && sessionStorage.getItem('chatroom') != null) {
                    clib.displaycomChatHistory();
                 }
                 
