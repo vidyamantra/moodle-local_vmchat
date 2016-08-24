@@ -6,7 +6,7 @@
 * Also uses some styles for jquery.ui.dialog
 */
 
-define(['jquery', 'jqueryui', 'src/chatboxManager'], function($, jui, chatboxManager) {
+define(['jquery', 'jqueryui', 'build/chatboxManager'], function($, jui, chatboxManager) {
 // Display online user list
 //(function($){
     $.widget("ui.memberlist", {

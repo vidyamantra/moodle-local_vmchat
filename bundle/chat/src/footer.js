@@ -1,5 +1,5 @@
-define(['jquery', 'jqueryui', 'src/chatboxManager', 'bundle/io/src/iolib','src/lib','src/lang.en'/*,'src/uichatlist', 'src/uichatroom'*/,'src/footerToggel'], function($, jui, chatboxManager, io, clib, lang) {
-
+define(['jquery', 'jqueryui', 'build/chatboxManager', 'bundle/io/build/iolib','build/lib','build/lang.en','build/footerToggel'], function($, jui, chatboxManager, io, clib, lang) {
+//define(['jquery', 'jqueryui', 'src/chatboxManager', 'bundle/io/build/iolib','src/lib','src/lang.en','src/footerToggel'], function($, jui, chatboxManager, io, clib, lang) {
 // widget for footer bar
 //(function($){
     $.widget("ui.footerbar", {

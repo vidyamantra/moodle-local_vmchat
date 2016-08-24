@@ -1,0 +1,1 @@
+define(["jquery"],function(a){a.fn.clickToggle=function(b,c){var d=[b,c];return this.data("toggleclicked",0),this.click(function(){var b=a(this).data(),c=b.toggleclicked;a.proxy(d[c],this)(),b.toggleclicked=(c+1)%2}),this}});

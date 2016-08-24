@@ -11,7 +11,8 @@
 
 */
 
-define(['jquery', 'jqueryui', 'src/lib', 'bundle/io/src/iolib'], function($, jui, clib, io) {
+define(['jquery', 'jqueryui', 'build/lib', 'bundle/io/build/iolib'], function($, jui, clib, io) {
+//define(['jquery', 'jqueryui', 'src/lib', 'bundle/io/build/iolib'], function($, jui, clib, io) {
 // TODO: implement destroy()
 //(function($){
     $.widget("ui.chatbox", {
