@@ -6,7 +6,7 @@
 * Also uses some styles for jquery.ui.dialog
 */
 
-define(['jquery', 'jqueryui', 'bundle/io/src/iolib'], function($, jui, io) {
+define(['jquery', 'jqueryui', 'bundle/io/build/iolib'], function($, jui, io) {
 // Display box for chatroom
 //(function($){
     $.widget("ui.chatroom", {

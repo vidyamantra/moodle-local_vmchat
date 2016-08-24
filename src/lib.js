@@ -1,5 +1,6 @@
 /* function library*/
-define(['jquery', 'bundle/io/src/iolib', 'src/chatboxManager','src/lang.en'], function($, io, chatboxManager, lang) {
+define(['jquery', 'bundle/io/build/iolib', 'build/chatboxManager','build/lang.en'], function($, io, chatboxManager, lang) {
+//define(['jquery', 'bundle/io/build/iolib', 'src/chatboxManager','build/lang.en'], function($, io, chatboxManager, lang) {
     return {
         counter: 0,
         idList: new Array(),
