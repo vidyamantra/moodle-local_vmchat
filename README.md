@@ -17,7 +17,9 @@ Installation in Moodle
 * Unzip the zip file and place the vmchat folder in local folder of Moodle.
 * Go to Site administration -> Vm chat and activate this module.
 
-
+Warning
+-------------
+Elegance theme is not supported
 
 change log for version 1.2
 ---------------------------
