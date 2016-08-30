@@ -80,10 +80,13 @@ function xmldb_local_vmchat_upgrade($oldversion) {
     }
     // Vmchat v 2.0 release upgrade line
     if ($oldversion < 2016082900) {
-        $additionalhtmlhead = preg_replace("/<!-- fcStart -->.*<!-- fcEnd -->/", "", $CFG->additionalhtmlhead);
-        set_config('additionalhtmlhead', $additionalhtmlhead);
-        set_config('jqhandle', 0, 'local_vmchat');
-        upgrade_plugin_savepoint(true, 2016082900, 'local', 'vmchat');
+    	if(get_config('local_vmchat', 'enablevmchat')){
+        	$additionalhtmlhead = preg_replace("/<!-- fcStart -->.*<!-- fcEnd -->/", "", $CFG->additionalhtmlhead);
+        	set_config('additionalhtmlhead', $additionalhtmlhead);
+        	set_config('jqhandle', 0, 'local_vmchat');
+        }
+        //hidden because of problem - lost section
+        //upgrade_plugin_savepoint(true, 2016082900, 'local', 'vmchat');
     }
     
     return true;
