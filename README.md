@@ -21,14 +21,10 @@ Warning
 -------------
 Elegance theme is not supported
 
-change log for version 1.2
+change log for version 2.0
 ---------------------------
-* jQuery confliction resolved
-* Image updated
-* Spelling update
+* AMD support added to fix jQuery conflict with themes
+* In ipad, Private chat window reset to blank on page refresh has been fixed
+* Use of Moodle jQuery
+* Removed code embedding in additional html header
 
-change log for version 1.2.1
----------------------------
-* New setting added to resolve jQuery confliction
-* file removed (include.js)
-* Js file directly included in header
