@@ -130,7 +130,7 @@ function local_vmchat_extend_navigation(global_navigation $nav) {
                 $authp = $_COOKIE['auth_pass'];
                 $authpt = $_COOKIE['path'];
                 $autht = $_COOKIE['tk'];
-                echo <<<EOD
+                /*echo <<<EOD
                 <script type="text/javascript">
                 //<![CDATA[
                 var wwwroot="$CFG->wwwroot/";
@@ -145,7 +145,12 @@ function local_vmchat_extend_navigation(global_navigation $nav) {
                 var lname = "$USER->lastname";
                 //]]>
                 </script>
-EOD;
+EOD;*/
+            $PAGE->requires->js('/local/vmchat/module.js');
+            $vmarray = array('wwwroot' =>"$CFG->wwwroot/", 'imageurl'=>$src, 'sid'=>$USER->sesskey,
+            'auth_user' => $authu, 'auth_pass' => $authp, 'path' => $authpt,
+            'tk' => $autht, 'id' => $USER->id, 'fname' => $USER->firstname, 'lname' => $USER->lastname);
+            $PAGE->requires->js_init_call('set_vmchat_variable', array($vmarray));
             }
         $PAGE->requires->js_call_amd('local_vmchat/vmchat', 'init',array("$CFG->wwwroot/"));
         }
